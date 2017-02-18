@@ -1,0 +1,114 @@
+group 'com.wenjun'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'jetty'
+
+sourceCompatibility = 1.5
+
+
+
+repositories {
+    //使用阿里云的maven仓库，速度比较快
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    jcenter()
+    mavenCentral()
+}
+
+//设置项目编码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+// 部署war到tomcat方式一， build/libs 下是编译好的war包
+task deploy (dependsOn: war){
+    copy {
+        from "build/libs"
+        into "E:\\apache-tomcat-8.0.22\\webapps\\"  // 换成你的tomcat目录
+        include "*.war"
+    }
+}
+
+//部署War文件到 tomcat方式二(Java代码实现)
+task copyToMyTomcat << {
+    def warFileStr = 'OADemo-1.0-SNAPSHOT.war'
+    def outFileStr = 'OADemo.war'
+    def tomcatPathStr = 'E:\\apache-tomcat-8.0.22\\webapps\\'
+
+    println("ready copy war to tomcat "+tomcatPathStr)
+
+    File outputfile = new File(tomcatPathStr+"/"+outFileStr);
+    File inputFile = new File("build/libs/"+ warFileStr);
+
+    FileInputStream fis = new FileInputStream(inputFile);
+    FileOutputStream fos = new FileOutputStream(outputfile);
+
+    byte[] buffer = new byte[1024];
+    int len = -1;
+    while((len=(fis.read(buffer)))> 0){
+        fos.write(buffer,0,len);
+    }
+    fos.flush();
+    fos.close();
+    fis.close()
+
+}
+
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+
+    // providedCompile 这个conf在java插件里是报错的，war里是正确的
+    providedCompile 'javax.servlet:servlet-api:2.5'
+    runtime 'javax.servlet:jstl:1.1.2'
+
+    def springVersion = "4.2.9.RELEASE"
+    def hibernateVerion = "4.3.10.Final"
+
+    //Hibernate
+    compile ("org.hibernate:hibernate-core:$hibernateVerion")
+    //Hibernate jpa实体管理
+    compile ("org.hibernate:hibernate-entitymanager:$hibernateVerion")
+    //Hibernate 可选包 c3p0
+    compile ("org.hibernate:hibernate-c3p0:$hibernateVerion")
+    //Hibernate 可选包 ehcache
+    compile ("org.hibernate:hibernate-ehcache:$hibernateVerion")
+
+//  SpringMVC(下面不需要全部写完，因为gradle会根据依赖关系下载相应的jar，重复的忽略，但这里怕遗忘，即全部写全，查看依赖关系gradle dependencies)
+    compile("org.springframework:spring-context:$springVersion",
+            "org.springframework:spring-core:$springVersion",
+            "org.springframework:spring-aop:$springVersion",
+            "org.springframework:spring-orm:$springVersion",
+            //  Spring JDBC是提供了一套JDBC抽象框架，用于简化JDBC开发。如JdbcTemplate
+            "org.springframework:spring-jdbc:$springVersion",
+            "org.springframework:spring-instrument-tomcat:$springVersion",
+            "org.springframework:spring-instrument:$springVersion",
+            "org.springframework:spring-expression:$springVersion",
+            "org.springframework:spring-context-support:$springVersion",
+            "org.springframework:spring-beans:$springVersion",
+            "org.springframework:spring-aspects:$springVersion",
+            "org.springframework:spring-test:$springVersion",
+            "org.springframework:spring-tx:$springVersion",
+            "org.springframework:spring-jms:$springVersion",
+            "org.springframework:spring-messaging:$springVersion",
+            "org.springframework:spring-oxm:$springVersion",
+            "org.springframework:spring-web:$springVersion",
+            "org.springframework:spring-webmvc:$springVersion",
+            "org.springframework:spring-webmvc-portlet:$springVersion")
+
+//    数据校检(使用此校检需要注意 jstl使用的一个问题，具体自行百度)
+//    compile group: 'org.hibernate', name: 'hibernate-validator', version: '4.3.2.Final'
+
+    // 数据库连接部分依赖
+    compile("mysql:mysql-connector-java:5.1.36")
+
+    // java mail (包含mail和activation两个包)
+    compile group: 'javax.mail', name: 'mail', version: '1.4.7'
+
+    //文件上传(commons-io和commons-fileupload两个包)
+    compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.1'
+
+}
