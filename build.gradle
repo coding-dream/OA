@@ -5,9 +5,7 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'jetty'
 
-sourceCompatibility = 1.5
-
-
+sourceCompatibility = 1.6
 
 repositories {
     //使用阿里云的maven仓库，速度比较快
@@ -102,8 +100,8 @@ dependencies {
 //    数据校检(使用此校检需要注意 jstl使用的一个问题，具体自行百度)
 //    compile group: 'org.hibernate', name: 'hibernate-validator', version: '4.3.2.Final'
 
-    // 数据库连接部分依赖
-    compile("mysql:mysql-connector-java:5.1.36")
+    // 数据库连接部分依赖(注意用5.1.24版本，5.1.36 测试有问题)
+//    compile("mysql:mysql-connector-java:5.1.24")
 
     // java mail (包含mail和activation两个包)
     compile group: 'javax.mail', name: 'mail', version: '1.4.7'

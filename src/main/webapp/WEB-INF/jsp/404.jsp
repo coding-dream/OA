@@ -12,13 +12,9 @@
   </head>
   <body>
 
-  <a href="${pageContext.request.contextPath}/hello?name=xiaoming&age=20">hello</a>
+    <center>
+      <h1>404 not Found</h1>
+    </center>
 
-<form action="/hello2" method="post" enctype="multipart/form-data">
-  <input type="text" name="name"/>
-  <input type="text" name="age"/>
-
-  <input type="submit" value="提交"/>
-</form>
   </body>
 </html>
