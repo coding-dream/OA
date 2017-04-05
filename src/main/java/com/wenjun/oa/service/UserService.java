@@ -1,5 +1,7 @@
 package com.wenjun.oa.service;
 
+import com.wenjun.oa.base.BaseDao;
+import com.wenjun.oa.bean.User;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,8 +11,9 @@ import org.springframework.stereotype.Service;
  * website: http://need88.com
  */
 @Service
-public class UserService {
-    public void list(){
-        System.out.println("===========list===========");
-    }
+public interface UserService extends BaseDao<User>{
+    public void list();
+
+
+
 }

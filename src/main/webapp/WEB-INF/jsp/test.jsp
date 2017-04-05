@@ -14,7 +14,6 @@
     Test<br/>
 
     RequestScope : ${requestScope.user.age}
-    user:${user.name}
-    age:${user.age}
+    Size:    ${requestScope.list}
 </body>
 </html>

@@ -24,10 +24,9 @@ public class TestService {
     public void saveUsers() {
         Session session = sessionFactory.getCurrentSession();
 
-        for(int i=0;i<2;i++) {
-            TestUser user = new TestUser();
-            user.setName("xiaoming"+i);
-            session.save(user);
-        }
+
     }
+
+
+
 }
