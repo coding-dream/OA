@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class LogAop {
+public class LogHandler {
 	// 声明一个切入点，本方法不能有返回值和参数
 	//execution(第一个*表示任意返回值的方法,)
 	@Pointcut("execution(* com.wenjun.oa.service.*.*(..))")
