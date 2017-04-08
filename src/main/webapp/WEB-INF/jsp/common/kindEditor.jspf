@@ -1,0 +1,53 @@
+
+<%
+    request.setCharacterEncoding("UTF-8");
+    String htmlData = request.getParameter("content") != null ? request.getParameter("content") : "";
+%>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath} /KindEditor/themes/default/default.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/KindEditor/plugins/code/prettify.css" />
+<script charset="utf-8" src="${pageContext.request.contextPath}/KindEditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="${pageContext.request.contextPath}/KindEditor/lang/zh_CN.js"></script>
+<script charset="utf-8" src="${pageContext.request.contextPath}/KindEditor/plugins/code/prettify.js"></script>
+
+<script>
+    KindEditor.ready(function(K) {
+        var editor1 = K.create('textarea[name="content"]', {
+            cssPath : '../plugins/code/prettify.css',
+            uploadJson : '../jsp/upload_json.jsp',
+            fileManagerJson : '../jsp/file_manager_json.jsp',
+            allowFileManager : true,
+            afterCreate : function() {
+                var self = this;
+                K.ctrl(document, 13, function() {
+                    self.sync();
+                    document.forms['ck_form'].submit();
+                });
+                K.ctrl(self.edit.doc, 13, function() {
+                    self.sync();
+                    document.forms['ck_form'].submit();
+                });
+            }
+        });
+        prettyPrint();
+    });
+</script>
+
+<%=htmlData%>
+<%!
+    private String htmlspecialchars(String str) {
+        str = str.replaceAll("&", "&amp;");
+        str = str.replaceAll("<", "&lt;");
+        str = str.replaceAll(">", "&gt;");
+        str = str.replaceAll("\"", "&quot;");
+        return str;
+    }
+%>
+
+<!-- 使用说明，引入该文件到 jsp的head中，form表单编写 如下即可, name = "ck_form" 可以修改上面的配置，此属性在ctrl+enter时提交表单，也可省略不用此功能
+<form name = "ck_form" action="hello" enctype="multipart/form-data" method="post">
+    <textarea name="content" cols="100" rows="8" style="width:700px;height:200px;"><%=htmlspecialchars(htmlData)%></textarea>
+    <input type = "submit" value = "提交" />
+</form>
+-->
+

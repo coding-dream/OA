@@ -4,20 +4,48 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <!-- 配置启动 Spring IOC 容器的 Listener -->
-    <!-- needed for ContextLoaderListener -->
+    <!-- 配置Spring的用于初始化容器对象的监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:beans.xml</param-value>
     </context-param>
 
-    <!-- Bootstraps the root web application context before servlet initialization -->
+    <!-- 用于初始化数据的监听器 -->
     <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+        <listener-class>com.wenjun.oa.listener.InitServletContextListener</listener-class>
     </listener>
 
 
+    <!-- 配置Spring的用于解决懒加载问题的过滤器 ，配置在 SpringMVC核心控制器之前-->
+    <filter>
+        <filter-name>OpenSessionInViewFilter</filter-name>
+        <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>OpenSessionInViewFilter</filter-name>
+        <url-pattern>*.action</url-pattern>
+    </filter-mapping>
 
+    <!-- 配置过滤器，同时把所有的请求都转为utf-8编码 -->
+    <filter>
+        <filter-name>Spring character encoding filter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>Spring character encoding filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <!--配置SpringMVC 核心控制器-->
     <servlet>
         <servlet-name>springDispatcherServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -33,7 +61,17 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <!-- 配置SpringMVC 支持 RESTFUL。 配置 HiddenHttpMethodFilter: 把 POST 请求转为 DELETE、PUT 请求 ，因为这里OpenSessionInViewFilter拦截action的问题，为了毕设时间问题，不再使用RESTFUL
+    <filter>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
 
+    <filter-mapping>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+-->
 
 
     <welcome-file-list>

@@ -61,7 +61,6 @@ dependencies {
 
     // providedCompile 这个conf在java插件里是报错的，war里是正确的
     providedCompile 'javax.servlet:servlet-api:2.5'
-    runtime 'javax.servlet:jstl:1.1.2'
 
     def springVersion = "4.2.9.RELEASE"
     def hibernateVerion = "4.3.10.Final"

@@ -18,7 +18,7 @@ public class UserAction {
     @RequestMapping("/hello")
     public String hello(HttpServletResponse response){
 
-        return "test";
+        return "user/loginUI";
     }
 
 
