@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title></title>
@@ -9,13 +10,12 @@
 
 <div id="StatusBar">
     <div id="Online">
-    	在线人员：共 <span class="OnlineUser" id="onlineUserNum"></span> 人<span class="OnlineView">
-        <a href="javascript:void(0)">[查看在线名单]</a>
+    	在线人员：共 <span class="OnlineUser" id="onlineUserNum">${applicationScope.online}</span> 人<span class="OnlineView">
 </span></div>
 
     <div id="Info">
-    	<a href="http://www.itcast.cn" title = "传智播客首页" target=_blank >传智播客首页</a> |
-        <a href="http://bbs.itcast.cn" title = "传智播客BBS" target=_blank >传智播客BBS</a>
+    	<a href="http://www.localhost:8080" title = "文珺OA系统" target=_blank >文珺OA系统</a> |
+        <a href="http://www.localhost:8080" title = "文珺OA系统" target=_blank >文珺OA系统</a>
     </div>
 
     <DIV id=DesktopText>

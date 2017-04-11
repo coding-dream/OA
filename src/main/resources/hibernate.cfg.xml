@@ -26,6 +26,7 @@
 	<!--<mapping resource="cn/itcast/oa/domain/User.hbm.xml" />-->
 	<mapping class="com.wenjun.oa.test.TestUser"/>
 	<mapping class="com.wenjun.oa.bean.User"/>
+	<mapping class="com.wenjun.oa.bean.Department"/>
 	<mapping class="com.wenjun.oa.bean.Role"/>
 	<mapping class="com.wenjun.oa.bean.Privilege"/>
 

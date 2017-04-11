@@ -20,7 +20,6 @@ public class InitServletContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext application = sce.getServletContext();
-
         // 得到Service的实例对象
         ApplicationContext ac = WebApplicationContextUtils.getWebApplicationContext(application);
         PrivilegeService privilegeService = (PrivilegeService) ac.getBean("privilegeServiceImpl");

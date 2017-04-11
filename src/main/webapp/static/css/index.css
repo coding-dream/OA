@@ -1,0 +1,51 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f7f7f7;
+    position: relative;
+    margin: 0px;
+    font-size: 12px;
+    padding: 0px;
+    /*-webkit-font-smoothing: antialiased;*/
+}
+
+h1,h2,h3,h4,h5 {
+    margin: 0;
+    line-height: inherit;
+    color: #29323d;
+}
+
+
+
+.top{
+    padding: 16px;
+    margin:8px;
+    background: #2A343E;
+}
+
+.top_right{
+    float: right;
+}
+
+
+.line{
+    margin: 16px;
+}
+.left{
+    background: #CCCCCC;
+}
+.right{
+
+}
+.bottom{
+
+}
+
+.shadow {
+    background-color:#fff;
+    -moz-box-shadow: 10px 10px 5px #888888; /* 老的 Firefox */
+    box-shadow: 10px 10px 5px #888888;
+}
+
+.ic_quit:hover{
+
+}

@@ -18,6 +18,7 @@ public class TestExceptionHandler {
     public ModelAndView handleXXException(Exception ex){
         System.out.println("=====handleXXException=====");
         ModelAndView mv = new ModelAndView("error");
+        ex.printStackTrace();
         mv.addObject("ex",ex);
         return mv;
     }

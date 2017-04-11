@@ -25,7 +25,15 @@ public class User {
     private String phoneNumber; // 电话号码
     private String email; // 电子邮件
     private String description; // 说明
+
+    //本类与 Department的多对一
+    @ManyToOne(targetEntity = Department.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "depart_id",referencedColumnName = "zj_depart_id")
+    private Department department;
+
+
     /**
+     * 本类与 role的多对多
      * ManyTo 本方为Many一方(从表)，可以设置cascade属性，主表删除，则从表级联删除
      * 多对多情况下，两端才同时控制关联，两端使用@JoinTable设置中间表。其他的情况只需一端控制使永@JoinColumn即可
      */
@@ -101,4 +109,38 @@ public class User {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", loginName='" + loginName + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", description='" + description + '\'' +
+                ", department=" + department +
+                ", roles=" + roles +
+                '}';
+    }
+
 }

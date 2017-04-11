@@ -10,12 +10,17 @@
 <html>
 <head>
     <title>This is test Jsp Pages</title>
-    <%@ include file="/WEB-INF/jsp/common/kindEditor.jspf"%>
 </head>
 <body>
 
-<form name = "ck_form" action="hello" enctype="multipart/form-data" method="post">
-    <textarea name="content" cols="100" rows="8" style="width:700px;height:200px;"><%=htmlspecialchars(htmlData)%></textarea>
+<form action="bbb" enctype="multipart/form-data" method="post">
+
+    <input type="text" name="departId"/>
+    <input type="text" name="name"/>
+    <input type="text" name="loginName"/>
+    <input type="text" name="password"/>
+
+    <input type="submit" value="提交"/>
 
 </form>
 

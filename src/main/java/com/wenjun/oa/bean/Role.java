@@ -20,7 +20,7 @@ public class Role {
     private Long id;
     private String name;
     private String description;
-    @ManyToMany(targetEntity = User.class,cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = User.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(
             name = "center_user_role",
             joinColumns = @JoinColumn(name = "role_id",referencedColumnName = "zj_role_id"),
@@ -29,7 +29,7 @@ public class Role {
     private Set<User> users = new HashSet<User>();
 
 
-    @ManyToMany(targetEntity = Privilege.class)
+    @ManyToMany(targetEntity = Privilege.class,fetch = FetchType.EAGER)
     @JoinTable(
             name = "center_role_privilege",
             joinColumns = @JoinColumn(name = "role_id",referencedColumnName = "zj_role_id"),

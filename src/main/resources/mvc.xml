@@ -68,16 +68,17 @@
 	<mvc:default-servlet-handler/>
 
 	<mvc:interceptors>
-	<!-- 配置自定义的拦截器 -->
-	<bean class="com.wenjun.oa.test.FirstInterceptor"></bean>
-
-	<!-- 配置拦截器作用(or 不作用 RequestMapping("/emps") )的路径 -->
-	<!-- (path="/**" 拦截所有请求)  path="/emps/** 拦截某一模块所有请求 " -->
-	<mvc:interceptor>
-	<!--<mvc:exclude-mapping path=""/>-->
-	<mvc:mapping path="/**"/>
-	<bean class="com.wenjun.oa.test.SecondInterceptor"></bean>
-	</mvc:interceptor>
+		<!-- 配置自定义的拦截器 默认拦截All请求-->
+		<!--<bean class="com.wenjun.oa.test.FirstInterceptor"/>-->
+		<!-- 配置拦截器作用(or 不作用 RequestMapping("/emps") )的路径 -->
+		<!-- (path="/**" 拦截所有请求)  path="/emps/** 拦截某一模块所有请求 " -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/login"/>
+			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/style/**"/>
+			<bean class="com.wenjun.oa.interceptors.PrivilegeInterceptor"/>
+		</mvc:interceptor>
 
 	</mvc:interceptors>
 
@@ -86,8 +87,6 @@
 		<!-- maxUploadSize:文件上传的最大值以byte为单位 -->
 		<property name="maxUploadSize" value="1024000"></property>
 	</bean>
-
-
 
 
 </beans>

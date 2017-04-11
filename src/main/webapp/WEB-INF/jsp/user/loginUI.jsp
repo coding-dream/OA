@@ -16,10 +16,10 @@
     </script>
 </head>
 
-<body leftmargin=0 topmargin=0 marginwidth=0 marginheight=0 class=PageBody >
+<body leftmargin=0 topmargin=0 marginwidth=0 marginheight=0 class=PageBody>
 
 <!-- 显示表单 -->
-<form action="user_login" method="post"  enctype="application/x-www-form-urlencoded">
+<form action="user_login.action" method="post"  enctype="application/x-www-form-urlencoded">
     <div id="CenterAreaBg">
         <div id="CenterArea">
             <div id="LogoImg"><span style="color: white;background-color: #003366;font-family: 仿宋;font-size: 25px" >文珺OA系统</span></div>

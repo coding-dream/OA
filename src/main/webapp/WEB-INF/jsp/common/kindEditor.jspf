@@ -4,18 +4,18 @@
     String htmlData = request.getParameter("content") != null ? request.getParameter("content") : "";
 %>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath} /KindEditor/themes/default/default.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/KindEditor/plugins/code/prettify.css" />
-<script charset="utf-8" src="${pageContext.request.contextPath}/KindEditor/kindeditor-min.js"></script>
-<script charset="utf-8" src="${pageContext.request.contextPath}/KindEditor/lang/zh_CN.js"></script>
-<script charset="utf-8" src="${pageContext.request.contextPath}/KindEditor/plugins/code/prettify.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath} /static/KindEditor/themes/default/default.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/KindEditor/plugins/code/prettify.css" />
+<script charset="utf-8" src="${pageContext.request.contextPath}/static/KindEditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="${pageContext.request.contextPath}/static/KindEditor/lang/zh_CN.js"></script>
+<script charset="utf-8" src="${pageContext.request.contextPath}/static/KindEditor/plugins/code/prettify.js"></script>
 
 <script>
     KindEditor.ready(function(K) {
         var editor1 = K.create('textarea[name="content"]', {
-            cssPath : '../plugins/code/prettify.css',
-            uploadJson : '../jsp/upload_json.jsp',
-            fileManagerJson : '../jsp/file_manager_json.jsp',
+            cssPath : '${pageContext.request.contextPath}/static/KindEditor/plugins/code/prettify.css',
+            uploadJson : '${pageContext.request.contextPath}/static/KindEditor/jsp/upload_json.jsp',
+            fileManagerJson : '${pageContext.request.contextPath}/static/KindEditor/jsp/file_manager_json.jsp',
             allowFileManager : true,
             afterCreate : function() {
                 var self = this;

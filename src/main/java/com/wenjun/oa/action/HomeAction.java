@@ -14,23 +14,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Scope("prototype")
 public class HomeAction  {
 
-    @RequestMapping("/index")
+    @RequestMapping("/home_index.action")
     public String index() throws Exception {
         return "home/index";
     }
-    @RequestMapping("/top")
+    @RequestMapping("/home_top.action")
     public String top() throws Exception {
         return "home/top";
     }
-    @RequestMapping("/bottom")
+    @RequestMapping("/home_bottom.action")
     public String bottom() throws Exception {
         return "home/bottom";
     }
-    @RequestMapping("/left")
+    @RequestMapping("/home_left.action")
     public String left() throws Exception {
         return "home/left";
     }
-    @RequestMapping("/right")
+    @RequestMapping("/home_right.action")
     public String right() throws Exception {
         return "home/right";
     }
