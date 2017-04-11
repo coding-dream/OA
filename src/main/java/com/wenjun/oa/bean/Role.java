@@ -20,7 +20,7 @@ public class Role {
     private Long id;
     private String name;
     private String description;
-    @ManyToMany(targetEntity = User.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = User.class,fetch = FetchType.EAGER)
     @JoinTable(
             name = "center_user_role",
             joinColumns = @JoinColumn(name = "role_id",referencedColumnName = "zj_role_id"),

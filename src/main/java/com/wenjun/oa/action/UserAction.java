@@ -27,8 +27,6 @@ public class UserAction {
     @Resource
     protected UserService userService;
 
-    private User mUser; //保存一些变量,防止浏览器的刷新丢失
-
 
     //登录页面
     @RequestMapping("/user_loginUI.action")
@@ -39,14 +37,13 @@ public class UserAction {
     //登录
     @RequestMapping("/user_login.action")
     public String login(User user, HttpSession session ) {
-        mUser = user;
 
         if (session.getAttribute("user")!=null) {
             //已经登陆过
             return "home/index";// 后台主界面
         }
 
-        User u  = userService.findByNameAndPassword(mUser.getLoginName(),mUser.getPassword());
+        User u  = userService.findByNameAndPassword(user.getLoginName(),user.getPassword());
         if (u == null) {
             return "user/loginUI";
         } else {

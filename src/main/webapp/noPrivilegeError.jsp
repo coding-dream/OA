@@ -48,7 +48,7 @@
             }
             else {
                 window.clearInterval(timer);
-                location.href = "${pageContext.request.contextPath}/index.action";
+                location.href = "${pageContext.request.contextPath}/home_index.action";
             }
         }
 
@@ -56,7 +56,7 @@
         function resetTimer() {
             if (timer != null && timer != undefined) {
                 window.clearInterval(timer);
-                location.href = "${pageContext.request.contextPath}/index.action";
+                location.href = "${pageContext.request.contextPath}/home_index.action";
             }
         }
     </script>

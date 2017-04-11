@@ -21,15 +21,15 @@ public class Department {
     private String description;
 
     // mappedBy="department"属性(name="department" 取决于另一个实体User的 private Department department;)
-    @OneToMany(targetEntity = User.class,mappedBy = "department",fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = User.class,mappedBy = "department",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Set<User> users = new HashSet<User>();
 
     //自关联
-    @ManyToOne(targetEntity = Department.class,cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Department.class)
     @JoinColumn(name = "parent_id",referencedColumnName = "zj_depart_id")
     private Department parent;
 
-    @OneToMany(targetEntity = Department.class,mappedBy = "parent",fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Department.class,mappedBy = "parent",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Set<Department> children = new HashSet<Department>();
 
 

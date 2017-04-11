@@ -27,7 +27,7 @@ public class User {
     private String description; // 说明
 
     //本类与 Department的多对一
-    @ManyToOne(targetEntity = Department.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = Department.class,fetch = FetchType.EAGER)
     @JoinColumn(name = "depart_id",referencedColumnName = "zj_depart_id")
     private Department department;
 
@@ -37,7 +37,7 @@ public class User {
      * ManyTo 本方为Many一方(从表)，可以设置cascade属性，主表删除，则从表级联删除
      * 多对多情况下，两端才同时控制关联，两端使用@JoinTable设置中间表。其他的情况只需一端控制使永@JoinColumn即可
      */
-    @ManyToMany(targetEntity = Role.class,cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Role.class,fetch = FetchType.EAGER)
     @JoinTable(
             name = "center_user_role",
             joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "zj_user_id"),

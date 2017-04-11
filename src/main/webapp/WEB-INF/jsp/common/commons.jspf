@@ -4,5 +4,4 @@
 <script language="javascript" src="${pageContext.request.contextPath}/static/js/httpUtils.js" charset="utf-8"></script>
 <script language="javascript" src="${pageContext.request.contextPath}/static/js/jsonUtils.js" charset="utf-8"></script>
 <script language="javascript" src="${pageContext.request.contextPath}/static/js/domToJquery.js" charset="utf-8"></script>
-<script type="text/javascript">
-</script>
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/blue/pageCommon.css" />

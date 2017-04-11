@@ -24,7 +24,6 @@ public class PrivilegeInterceptor implements HandlerInterceptor{
 		User user = (User) request.getSession().getAttribute("user");
 
 		String privUrl = request.getRequestURI();// privUrl 类似 /hello
-		System.out.println("========= Interceptor GET "+privUrl+" =========");
 		//如果未登录
 		if (user == null) {
 			if (privUrl.startsWith("/user_login")) { //登录或登录页面
@@ -78,7 +77,12 @@ public class PrivilegeInterceptor implements HandlerInterceptor{
 		if (pos > -1) {
 			privUrl = privUrl.substring(0, pos);
 		}
-		// >> 去掉UI后缀
+		// >>去掉 .action后缀
+		if (privUrl.endsWith(".action")) {
+			privUrl = privUrl.substring(0, privUrl.length() - 7);
+		}
+
+			// >> 去掉UI后缀
 		if (privUrl.endsWith("UI")) {
 			privUrl = privUrl.substring(0, privUrl.length() - 2);
 		}
