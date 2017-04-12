@@ -1,5 +1,7 @@
 package com.wenjun.oa.base;
 
+import com.wenjun.oa.bean.PageBean;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,5 +76,34 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
      */
     protected Session getSession() {
         return sessionFactory.getCurrentSession();
+    }
+
+    @Override
+    public PageBean getPageBean(int currentPage, int pageSize, String hql, List<Object> parameters) {
+        System.out.println("-------> DaoSupportImpl.getPageBean()");
+
+        // 查询本页的数据列表
+        Query listQuery = getSession().createQuery(hql); // 创建查询对象
+        if (parameters != null) { // 设置参数
+            for (int i = 0; i < parameters.size(); i++) {
+                listQuery.setParameter(i, parameters.get(i));
+            }
+        }
+
+        //MySQL分页形式和Hibernate一样 ,如MySQL String sql = "select * from goods limit "+firstResult+","+maxResults+"";
+        listQuery.setFirstResult((currentPage - 1) * pageSize);
+        listQuery.setMaxResults(pageSize);
+        List list = listQuery.list(); // 执行查询
+
+        // 查询总记录数量
+        Query countQuery = getSession().createQuery("SELECT COUNT(*) " + hql);
+        if (parameters != null) { // 设置参数
+            for (int i = 0; i < parameters.size(); i++) {
+                countQuery.setParameter(i, parameters.get(i));
+            }
+        }
+        Long count = (Long) countQuery.uniqueResult(); // 执行查询
+
+        return new PageBean(currentPage, pageSize, count.intValue(), list);
     }
 }

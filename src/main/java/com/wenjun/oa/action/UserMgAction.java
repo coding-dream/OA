@@ -1,6 +1,8 @@
 package com.wenjun.oa.action;
 
+import com.wenjun.oa.Constants;
 import com.wenjun.oa.bean.Department;
+import com.wenjun.oa.bean.PageBean;
 import com.wenjun.oa.bean.Role;
 import com.wenjun.oa.bean.User;
 import com.wenjun.oa.service.DepartmentService;
@@ -43,15 +45,21 @@ public class UserMgAction {
 
 
     @RequestMapping("/user_list.action")
-    public String list(Integer currentPage,Integer pageSize){
+    public String list(Integer currentPage,Map map){
         // 分页显示
+        if (currentPage == null ) {
+            currentPage = Constants.PAGE_CURRENT_DEFAULT;
+        }
 
+        String sql = "FROM User";
+        PageBean pageBean = userMgService.getPageBean(currentPage, Constants.PAGE_SIZE, sql, null);
+        map.put("pageBean", pageBean);
         return "user/list";
     }
 
     @RequestMapping("/user_delete.action")
-    public String delete(Long id) {
-        userMgService.delete(id);
+    public String delete(Long userId) {
+        userMgService.delete(userId);
         return "redirect:/user_list.action";
     }
 
@@ -113,7 +121,6 @@ public class UserMgAction {
             for (Role role : user.getRoles()) {
                 roleIds[index++] = role.getId();
             }
-            //todo
             map.put("roleIds", roleIds);
         }
 
@@ -150,10 +157,10 @@ public class UserMgAction {
 
 
     /** 初始化密码为1234 */
-    @RequestMapping("/user_init.action")
-    public String initPassword(User model) throws Exception {
+    @RequestMapping("/user_initPassword.action")
+    public String initPassword(Long userId) throws Exception {
         // 1，从数据库中取出原对象
-        User user = userMgService.getById(model.getId());
+        User user = userMgService.getById(userId);
 
         // 2，设置要修改的属性（要使用MD5摘要）
         String md5Digest = DigestUtils.md5Hex("1234");

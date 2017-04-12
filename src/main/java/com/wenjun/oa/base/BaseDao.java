@@ -1,5 +1,7 @@
 package com.wenjun.oa.base;
 
+import com.wenjun.oa.bean.PageBean;
+
 import java.util.List;
 
 /**
@@ -24,4 +26,9 @@ public interface BaseDao<T> {
     List<T> findAll();
 
     Class getEntityClass();
+
+    // 公共的查询分页信息的方法
+    PageBean getPageBean(int currentPage, int pageSize, String hql, List<Object> parameters);
+
+
 }

@@ -34,7 +34,7 @@
         <!--显示数据列表-->
         <tbody id="TableData" class="dataContainer" datakey="userList">
 
-        <c:forEach var="user" items="${recordList}">
+        <c:forEach var="user" items="${pageBean.recordList}">
             <tr class="TableDetail1 template">
                 <td>${user.loginName}&nbsp;</td>
                 <td>${user.name}&nbsp;</td>
@@ -46,9 +46,9 @@
                 </td>
                 <td>${user.description}&nbsp;</td>
                 <td>
-                    <a href="user_delete.action?id=${user.id}" onclick="return delConfirm()">删除</a>
-                    <a href="user_editUI.action?id=${user.id}">修改</a>
-                    <a href="user_initPassword.action?id=${user.id}" onclick="return window.confirm('您确定要初始化密码为1234吗？')">初始化密码</a>
+                    <a href="user_delete.action?userId=${user.id}" onclick="return delConfirm()">删除</a>
+                    <a href="user_editUI.action?userId=${user.id}">修改</a>
+                    <a href="user_initPassword.action?userId=${user.id}" onclick="return window.confirm('您确定要初始化密码为1234吗？')">初始化密码</a>
                 </td>
             </tr>
         </c:forEach>
@@ -66,7 +66,10 @@
     </div>
 </div>
 
-
+<!-- 分页信息 -->
+<%@ include  file="/WEB-INF/jsp/common/pageView.jspf"%>
+<form action="user_list.action" method="post"/>
+<!-- 分页信息 -->
 
 </body>
 </html>
