@@ -16,8 +16,8 @@ public class CheckTag  extends SimpleTagSupport{
 //    模拟 Struts2 标签 <s:property value="%{id in privilegeIds ? 'checked' : ''}"/>
 
     //标签的属性均为字符串，不支持其他类型
-    private Long id;
-    private Long [] ids;
+    private Long var;
+    private Long [] list;
 
 
     @Override
@@ -25,26 +25,26 @@ public class CheckTag  extends SimpleTagSupport{
 
         JspWriter jspWriter = getJspContext().getOut();
 
-        for (Long i : ids) {
-            if (id == i) {
+        for (Long i : list) {
+            if ( var == i) {
                 jspWriter.write("checked");
             }
         }
     }
 
-    public Long getId() {
-        return id;
+    public Long getVar() {
+        return var;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setVar(Long var) {
+        this.var = var;
     }
 
-    public Long[] getIds() {
-        return ids;
+    public Long[] getList() {
+        return list;
     }
 
-    public void setIds(Long[] ids) {
-        this.ids = ids;
+    public void setList(Long[] list) {
+        this.list = list;
     }
 }
