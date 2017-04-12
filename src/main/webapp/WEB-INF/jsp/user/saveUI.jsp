@@ -19,7 +19,7 @@
 
 <!--显示表单内容-->
 <div id=MainArea>
-    <form action="user_${user.id == null ? 'add':'edit'}.action" method="post">
+    <form action="user_${requestScope.user.id == null ? 'add':'edit'}.action" method="post">
         <input type="hidden" name="id" value="${user.id}"/>
 
         <div class="ItemBlock_Title1">
@@ -46,31 +46,31 @@
                     </tr>
                     <tr><td>登录名</td>
                         <td>
-                            <input name="loginName" class="InputStyle" value="${loginName}"/> *
+                            <input name="loginName" class="InputStyle" value="${requestScope.user.loginName}"/> *
                             （登录名要唯一）
                         </td>
                     </tr>
                     <tr>
                         <td>姓名</td>
-                        <td><input type="text" name="name" class="InputStyle" value="${name}"/> *</td>
+                        <td><input type="text" name="name" class="InputStyle" value="${requestScope.user.name}"/> *</td>
                     </tr>
                     <tr>
                         <td>性别</td>
                         <td>
-                            <input type="radio" name="gender" value="${gender}">男<br>
-                            <input type="radio" name="gender" value="${gender}">女<br>
+                            <input type="radio" name="gender" value="${requestScope.user.gender}">男<br>
+                            <input type="radio" name="gender" value="${requestScope.user.gender}">女<br>
                         </td>
                     </tr>
                     <tr><td>联系电话</td>
-                        <td><input type="text" name="phoneNumber" class="InputStyle" value="${phoneNumber}"/></td>
+                        <td><input type="text" name="phoneNumber" class="InputStyle" value="${requestScope.user.phoneNumber}"/></td>
                     </tr>
                     <tr>
                         <td>E-mail</td>
-                        <td><input type="text" name="email" class="InputStyle" value="${email}"/> </td>
+                        <td><input type="text" name="email" class="InputStyle" value="${requestScope.user.email}"/> </td>
                     </tr>
                     <tr>
                         <td>备注</td>
-                        <td><textarea name="description" class="TextareaStyle" value="${description}"></textarea></td>
+                        <td><textarea name="description" class="TextareaStyle" value="${requestScope.user.description}"></textarea></td>
                     </tr>
                 </table>
             </div>
@@ -90,7 +90,8 @@
                     <tr>
                         <td width="100">岗位</td>
                         <td>
-                            <select name="roleIds" class="SelectStyle">
+                            <select name="roleIds" class="SelectStyle" multiple="multiple">
+                                <option value="">请选择岗位</option>
                                 <c:forEach var="role" items="${roleList}">
                                     <option value="${role.id}">${role.name}</option>
                                 </c:forEach>

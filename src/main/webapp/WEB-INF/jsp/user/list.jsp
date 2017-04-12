@@ -33,40 +33,39 @@
         
         <!--显示数据列表-->
         <tbody id="TableData" class="dataContainer" datakey="userList">
-        
-        <s:iterator value="recordList">
+
+        <c:forEach var="user" items="${recordList}">
             <tr class="TableDetail1 template">
-                <td>${loginName}&nbsp;</td>
-                <td>${name}&nbsp;</td>
-                <td>${department.name}&nbsp;</td>
+                <td>${user.loginName}&nbsp;</td>
+                <td>${user.name}&nbsp;</td>
+                <td>${user.department.name}&nbsp;</td>
                 <td>
-                	<s:iterator value="roles">
-                		${name}
-                	</s:iterator>
+                    <c:forEach var="role" items="${user.roles}">
+                        ${role.name}
+                    </c:forEach>
                 </td>
-                <td>${description}&nbsp;</td>
+                <td>${user.description}&nbsp;</td>
                 <td>
-                	<s:a action="user_delete?id=%{id}" onclick="return delConfirm()">删除</s:a>
-                    <s:a action="user_editUI?id=%{id}">修改</s:a>
-					<s:a action="user_initPassword?id=%{id}" onclick="return window.confirm('您确定要初始化密码为1234吗？')">初始化密码</s:a>
+                    <a href="user_delete.action?id=${user.id}" onclick="return delConfirm()">删除</a>
+                    <a href="user_editUI.action?id=${user.id}">修改</a>
+                    <a href="user_initPassword.action?id=${user.id}" onclick="return window.confirm('您确定要初始化密码为1234吗？')">初始化密码</a>
                 </td>
             </tr>
-        </s:iterator> 
-            
+        </c:forEach>
+
         </tbody>
     </table>
     
     <!-- 其他功能超链接 -->
     <div id="TableTail">
         <div id="TableTail_inside">
-            <s:a action="user_addUI"><img src="${pageContext.request.contextPath}/style/images/createNew.png" /></s:a>
+            <a href="user_addUI.action">
+                <img src="${pageContext.request.contextPath}/style/images/createNew.png" />
+            </a>
         </div>
     </div>
 </div>
 
-<!-- 分页信息 -->
-<%@ include  file="/WEB-INF/jsp/public/pageView.jspf"%>
-<s:form action="user_list"></s:form>
 
 
 </body>

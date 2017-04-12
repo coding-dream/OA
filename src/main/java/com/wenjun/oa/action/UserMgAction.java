@@ -69,13 +69,13 @@ public class UserMgAction {
     }
 
     @RequestMapping("/user_add.action")
-    public String add(User model,Long departmentId,Long []roleIds){
+    public String add(User model,Long departmentId,Long [] roleIds){
 
         // 封装到对象中（当model是实体类型时，也可以使用model，但要设置未封装的属性）
         // >> 设置所属部门
         model.setDepartment(departmentService.getById(departmentId));
         // >> 设置关联的岗位
-        List<Role> roleList = roleService.getByIds(roleIds);
+        List<Role> roleList = roleService.getByIds(roleIds);//如果roleIds是null，service返回的是空集合，故安全性高，不会抛空指针异常
         model.setRoles(new HashSet<Role>(roleList));
         // >> 设置默认密码为1234（要使用MD5摘要）
         String md5Digest = DigestUtils.md5Hex("1234");
