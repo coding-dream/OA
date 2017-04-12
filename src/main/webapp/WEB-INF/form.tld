@@ -15,7 +15,7 @@
             this is a custom taglib
         </description>
         <name>check</name>
-        <tag-class>com.wenjun.oa.taglib.CheckTag</tag-class>
+        <tag-class>com.wenjun.oa.taglib.CheckBoxTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>var</name>
@@ -35,5 +35,29 @@
         <tag-class>com.wenjun.oa.taglib.PrintTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
+
+
+
+    <tag>
+        <description>
+            this is a custom taglib
+        </description>
+        <name>selected</name>
+        <tag-class>com.wenjun.oa.taglib.SelectTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>  <!-- 指示属性的值是否可以为一个表达式 -->
+        </attribute>
+
+        <attribute>
+            <name>list</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>  <!-- 指示属性的值是否可以为一个表达式 -->
+        </attribute>
+    </tag>
+
+
 
 </taglib>

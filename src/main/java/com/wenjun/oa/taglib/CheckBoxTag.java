@@ -12,7 +12,7 @@ import java.io.IOException;
  * website: http://need88.com
  */
 
-public class CheckTag  extends SimpleTagSupport{
+public class CheckBoxTag extends SimpleTagSupport{
 //    模拟 Struts2 标签 <s:property value="%{id in privilegeIds ? 'checked' : ''}"/>
 
     //标签的属性均为字符串，不支持其他类型
@@ -22,6 +22,9 @@ public class CheckTag  extends SimpleTagSupport{
 
     @Override
     public void doTag() throws JspException, IOException {
+        if (var == null || list == null) {
+            return;
+        }
 
         JspWriter jspWriter = getJspContext().getOut();
 

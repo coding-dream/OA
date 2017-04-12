@@ -27,7 +27,7 @@ public class User {
     private String description; // 说明
 
     //本类与 Department的多对一
-    @ManyToOne(targetEntity = Department.class,fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = Department.class,fetch = FetchType.LAZY)
     @JoinColumn(name = "depart_id",referencedColumnName = "zj_depart_id")
     private Department department;
 

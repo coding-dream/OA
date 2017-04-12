@@ -19,14 +19,13 @@ public class TestSpring {
         SessionFactory sessionFactory = (SessionFactory) ac.getBean("sessionFactory");
         Session session = sessionFactory.openSession();
 
-        String password = DigestUtils.md5Hex("1234");
-        for (int i=0;i<100;i++) {
-            User user = new User();
-            user.setName("name" + i);
-            user.setLoginName("loginName" + i);
-            user.setPassword(password);
-            session.save(user);
-        }
+        String password = DigestUtils.md5Hex("admin");
+
+        User user = new User();
+        user.setName("管理员");
+        user.setLoginName("admin");
+        user.setPassword(password);
+        session.save(user);
         session.close();
 
     }

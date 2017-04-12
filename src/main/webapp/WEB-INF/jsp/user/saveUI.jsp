@@ -1,3 +1,4 @@
+<%@ taglib prefix="v" uri="https://wangli0.github.io/jsp/custom/core" %>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <html>
 <head>
@@ -36,11 +37,15 @@
                     <tr><td width="100">所属部门</td>
                         <td>
                             <select name="departmentId" class="SelectStyle">
-                                <option value="">请选择上级部门</option>
+                                <option value="">===请选择所属部门===</option>
                                 <c:forEach var="depart" items="${departmentList}">
-                                    <option value="${depart.id}">${depart.name}</option>
+                                    <c:if test="${departmentId == depart.id}">
+                                        <option value="${depart.id}" selected>${depart.name}</option>
+                                    </c:if>
+                                    <c:if test="${departmentId != depart.id}">
+                                        <option value="${depart.id}">${depart.name}</option>
+                                    </c:if>
                                 </c:forEach>
-
                             </select>
                         </td>
                     </tr>
@@ -57,7 +62,7 @@
                     <tr>
                         <td>性别</td>
                         <td>
-                            <input type="radio" name="gender" value="${requestScope.user.gender}">男<br>
+                            <input type="radio" name="gender" value="${requestScope.user.gender}" checked>男<br>
                             <input type="radio" name="gender" value="${requestScope.user.gender}">女<br>
                         </td>
                     </tr>
@@ -93,7 +98,7 @@
                             <select name="roleIds" class="SelectStyle" multiple="multiple">
                                 <option value="">请选择岗位</option>
                                 <c:forEach var="role" items="${roleList}">
-                                    <option value="${role.id}">${role.name}</option>
+                                    <option value="${role.id}" <v:selected var="${role.id}" list="${roleIds}"/> >${role.name}</option>
                                 </c:forEach>
                             </select>
                             按住Ctrl键可以多选或取消选择
