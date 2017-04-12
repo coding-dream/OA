@@ -45,8 +45,8 @@ public class DepartmentAction {
     }
 
     @RequestMapping("/department_delete.action")
-    public String delete(Long parentId,Department model, RedirectAttributes attr) throws Exception {
-        departmentService.delete(model.getId());
+    public String delete(Long parentId,Long id, RedirectAttributes attr) throws Exception {
+        departmentService.delete(id);
 
         /** 带参数的重定向
          * addFlashAttribute实际上将这些属性存储在flashmap中（内部维护在用户会话中，一旦下一次重定向的请求得到满足就会被删除），

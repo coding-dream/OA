@@ -62,6 +62,8 @@ dependencies {
     // providedCompile 这个conf在java插件里是报错的，war里是正确的
 //    providedCompile 'javax.servlet:servlet-api:2.5'
     compile 'javax.servlet:servlet-api:2.5'
+    compile group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.2'
+
 
     def springVersion = "4.2.9.RELEASE"
     def hibernateVerion = "4.3.10.Final"

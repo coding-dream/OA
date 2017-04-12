@@ -13,15 +13,15 @@
 </head>
 <body>
 
-<form action="bbb" enctype="multipart/form-data" method="post">
+<form action="test.action" enctype="multipart/form-data" method="post">
 
-    <input type="text" name="departId"/>
+    <input type="text" name="age"/>
+
     <input type="text" name="name"/>
     <input type="text" name="loginName"/>
     <input type="text" name="password"/>
 
     <input type="submit" value="提交"/>
-
 
 </form>
 

@@ -24,14 +24,15 @@ public class TestAction {
     @Resource
     private UserService userService;
 
-    @RequestMapping("/test")
+    @RequestMapping("/testUI.action")
     public String test(Map map){
-        System.out.println("====save user====");
-        User user = new User();
-        user.setName("xiaoming");
+        return "test";
+    }
 
-        List<User> list = userService.getByIds(new Long[]{1L, 2L,3L});
-        map.put("list", list);
+    @RequestMapping("/test.action")
+    public String testUI(Long age,User user){
+        System.out.println("age:"+age);
+        System.out.println("user:"+user);
         return "test";
     }
 

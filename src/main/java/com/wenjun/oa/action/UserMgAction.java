@@ -35,10 +35,15 @@ public class UserMgAction {
     @Resource
     private DepartmentService departmentService ;
 
-    // action (addUI, editUI 准备的数据不同) 但 共用同一个页面 saveUI.jsp
+    /**
+     * action (addUI, editUI 准备的数据不同) 但 共用同一个页面 saveUI.jsp
+     * editUI和delete均由 list.jsp页面操作，故只需要参数 model的id即可，editUI用于回显数据，delete用于删除数据
+     * SpringMVC参数传递过程中，表单name要和 list(String name,User model的属性name )对应，其中实体变量model名称可为任意变量名
+     */
+
 
     @RequestMapping("/user_list.action")
-    public String list(int currentPage,int pageSize){
+    public String list(Integer currentPage,Integer pageSize){
         // 分页显示
 
         return "user/list";
@@ -49,6 +54,7 @@ public class UserMgAction {
         userMgService.delete(id);
         return "redirect:/user_list.action";
     }
+
     @RequestMapping("/user_addUI.action")
     public String addUI(Map map) {
         // 添加用户，首先 准备 departmentList数据 和 roleList 数据 回显，放入request中
@@ -107,6 +113,7 @@ public class UserMgAction {
             for (Role role : user.getRoles()) {
                 roleIds[index++] = role.getId();
             }
+            //todo
             map.put("roleIds", roleIds);
         }
 

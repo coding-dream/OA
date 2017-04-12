@@ -21,7 +21,7 @@ public class Department {
     private String description;
 
     // mappedBy="department"属性(name="department" 取决于另一个实体User的 private Department department;)
-    @OneToMany(targetEntity = User.class,mappedBy = "department",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = User.class,mappedBy = "department",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<User> users = new HashSet<User>();
 
     //自关联
@@ -29,7 +29,7 @@ public class Department {
     @JoinColumn(name = "parent_id",referencedColumnName = "zj_depart_id")
     private Department parent;
 
-    @OneToMany(targetEntity = Department.class,mappedBy = "parent",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Department.class,mappedBy = "parent",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<Department> children = new HashSet<Department>();
 
 

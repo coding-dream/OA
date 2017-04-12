@@ -18,7 +18,6 @@ import java.util.List;
  */
 
 @Service
-@Transactional
 public class DepartmentServiceImpl extends BaseDaoImpl<Department> implements DepartmentService {
 
     @Resource

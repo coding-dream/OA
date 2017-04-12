@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+
+    <description>custom form core library</description>
+    <display-name>custom core</display-name>
+    <tlib-version>1.0</tlib-version>
+    <short-name>v</short-name>
+    <uri>https://wangli0.github.io/jsp/custom/core</uri>
+
+    <tag>
+        <description>
+            this is a custom taglib
+        </description>
+        <name>check</name>
+        <tag-class>com.wenjun.oa.taglib.CheckTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>  <!-- 指示属性的值是否可以为一个表达式 -->
+        </attribute>
+
+        <attribute>
+            <name>list</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>  <!-- 指示属性的值是否可以为一个表达式 -->
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>print</name>
+        <tag-class>com.wenjun.oa.taglib.PrintTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+</taglib>
