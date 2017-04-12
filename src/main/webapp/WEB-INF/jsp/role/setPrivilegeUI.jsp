@@ -6,25 +6,39 @@
 <html>
 <head>
 	<title>配置权限</title>
-    <%@ include file="/WEB-INF/jsp/common/commons.jspf" %>
-	<script language="javascript" src="${pageContext.request.contextPath}/static/jquery_treeview/jquery.treeview.js"></script>
+	<!--注意这里jQuery1.10.2.js 对checked修改的一个bug，坑了大爷很长时间,本项目v1.3.2版本 支持良好 -->
+	<%@ include file="/WEB-INF/jsp/common/commons.jspf" %>
+
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/blue/file.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/static/jquery_treeview/jquery.treeview.css" />
+	<script language="javascript" src="${pageContext.request.contextPath}/static/jquery_treeview/jquery.treeview.js"></script>
 	<script type="text/javascript">
-		$(function(){
-			// 指定事件处理函数
-			$("[name=privilegeIds]").click(function(){
-				
-				// 当选中或取消一个权限时，也同时选中或取消所有的下级权限
-				$(this).siblings("ul").find("input").attr("checked", this.checked);
-				
-				// 当选中一个权限时，也要选中所有的直接上级权限
-				if(this.checked == true){
-					$(this).parents("li").children("input").attr("checked", true);
-				}
-				
-			});
-		});
+        $(function(){
+
+            // 给所有的权限复选框添加事件
+            $("[name=privilegeIds]").click(function(){
+                // 自己选中或取消时，把所有的下级权限也都同时选中或取消
+                $(this).siblings("ul").find("input").attr("checked", this.checked);
+
+                // 当选中一个权限时，也要同时选中所有的直系上级权限
+                if(this.checked){
+                    $(this).parents("li").children("input").attr("checked", true);
+                }
+                // 当取消一个权限时，同级没有选中的权限了，就也取消他的上级权限，再向上也这样做。
+                else{
+
+                    if( $(this).parent().siblings("li").children("input:checked").size() == 0 ){
+                        $(this).parent().parent().siblings("input").attr("checked", false);
+
+                        var start = $(this).parent().parent();
+                        if( start.parent().siblings("li").children("input:checked").size() == 0 ){
+                            start.parent().parent().siblings("input").attr("checked", false);
+                        }
+                    }
+                }
+            });
+
+        });
 	</script>
 </head>
 <body>
@@ -44,7 +58,7 @@
 <div id=MainArea>
 
     <form action="role_setPrivilege.action" method="post">
-		<input type="hidden" value="${role_id}"/>
+		<input type="hidden" name="id" value="${role.id}"/>
 
         <div class="ItemBlock_Title1"><!-- 信息说明 --><div class="ItemBlock_Title1">
         	<img border="0" width="4" height="7" src="${pageContext.request.contextPath}/style/blue/images/item_point.gif" /> 正在为【${role.name}】配置权限 </div>
@@ -58,7 +72,6 @@
 					<thead>
 						<tr align="LEFT" valign="MIDDLE" id="TableTitle">
 							<td width="300px" style="padding-left: 7px;">
-								<!-- 如果把全选元素的id指定为selectAll，并且有函数selectAll()，就会有错。因为有一种用法：可以直接用id引用元素 -->
 								<input type="checkbox" id="cbSelectAll" onClick="$('[name=privilegeIds]').attr('checked', this.checked)"/>
 								<label for="cbSelectAll">全选</label>
 							</td>
@@ -72,42 +85,28 @@
 							<td>
 
 
-<%-- 
-<s:checkboxlist name="privilegeIds" list="#privilegeList" listKey="id" listValue="name"></s:checkboxlist>
---%>
-
-<%-- 
-<s:iterator value="#privilegeList">
-	<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}"
-		<s:property value="%{id in privilegeIds ? 'checked' : ''}"/>
-	/>
-	<label for="cb_${id}">${name}</label>
-	<br/>
-</s:iterator>
---%>
-
 <!-- 显示树状结构内容 -->
 <ul id="tree">
 <c:forEach var="privilege" items="${applicationScope.topPrivilegeList}">
 	<li>
-		<input type="checkbox" name="privilegeIds" value="${privilege.id}" id="cb_${privilege.id}" <v:check var="" list="privilegeIds"/> />
+		<input type="checkbox" name="privilegeIds" value="${privilege.id}" id="cb_${privilege.id}" <v:check var="${privilege.id}" list="${privilegeIds}"/> />
 		<label for="cb_${privilege.id}"><span class="folder">${privilege.name}</span></label>
 
 		<ul>
-		<s:iterator value="children">
+		<c:forEach var="privilege" items="${privilege.children}">
 			<li>
-				<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}" <s:property value="%{id in privilegeIds ? 'checked' : ''}"/> />
-				<label for="cb_${id}"><span class="folder">${name}</span></label>
+				<input type="checkbox" name="privilegeIds" value="${privilege.id}" id="cb_${privilege.id}" <v:check var="${privilege.id}" list="${privilegeIds}"/> />
+				<label for="cb_${privilege.id}"><span class="folder">${privilege.name}</span></label>
 				<ul>
-				<s:iterator value="children">
+				<c:forEach var="privilege" items="${privilege.children}">
 					<li>
-						<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}" <s:property value="%{id in privilegeIds ? 'checked' : ''}"/> />
-						<label for="cb_${id}"><span class="folder">${name}</span></label>
+						<input type="checkbox" name="privilegeIds" value="${privilege.id}" id="cb_${privilege.id}" <v:check var="${privilege.id}" list="${privilegeIds}"/> />
+						<label for="cb_${privilege.id}"><span class="folder">${privilege.name}</span></label>
 					</li>
-				</s:iterator>
+				</c:forEach>
 				</ul>
-			</li>		
-		</s:iterator>
+			</li>
+		</c:forEach>
 		</ul>
 	</li>
 </c:forEach>

@@ -97,7 +97,6 @@ public class RoleAction {
             for (Privilege priv : role.getPrivileges()) {
                 privilegeIds[index++] = priv.getId();
             }
-            //todo
             map.put("privilegeIds", privilegeIds);
         }
 

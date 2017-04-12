@@ -33,7 +33,7 @@
         <tbody id="TableData" class="dataContainer" datakey="roleList">
 
         <c:forEach var="role" items="${roleList}">
-			<tr class="TableDetail1 template">
+			<tr class="TableDetail1 template" style="text-align: center">
 				<td>${role.name}&nbsp;</td>
 				<td>${role.description}&nbsp;</td>
 				<td>

@@ -33,7 +33,7 @@
         <tbody id="TableData" class="dataContainer" datakey="departmentList">
         <!-- 表单内容显示  table表格的样式要注意每个td 都有内容，否则样式不会显示-->
         <c:forEach var="department" items="${departmentList}">
-            <tr class="TableDetail1 template">
+            <tr class="TableDetail1 template" style="text-align: center;">
                 <!--当前页面的id  当做下一个页面的parentId-->
                 <td><a href="department_list.action?parentId=${department.id}">${department.name}</a>&nbsp;</td>
                 <td>${department.parent.name}&nbsp;</td>
