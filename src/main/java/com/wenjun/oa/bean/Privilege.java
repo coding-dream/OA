@@ -118,8 +118,6 @@ public class Privilege {
                 "id=" + id +
                 ", url='" + url + '\'' +
                 ", name='" + name + '\'' +
-                ", show=" + show +
                 '}';
     }
-
 }
