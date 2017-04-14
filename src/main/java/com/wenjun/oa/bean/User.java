@@ -1,6 +1,7 @@
 package com.wenjun.oa.bean;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,6 +26,8 @@ public class User {
     private String phoneNumber; // 电话号码
     private String email; // 电子邮件
     private String description; // 说明
+
+    private Date createTime; //注册时间
 
     //本类与 Department的多对一
     @ManyToOne(targetEntity = Department.class,fetch = FetchType.LAZY)
@@ -124,6 +127,14 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
 

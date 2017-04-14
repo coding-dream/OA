@@ -40,7 +40,7 @@ public class UserAction {
 
         if (session.getAttribute("user")!=null) {
             //已经登陆过
-            return "home/index";// 后台主界面
+            return "redirect:/home_index.action"; //后台主界面
         }
 
         User u  = userService.findByNameAndPassword(user.getLoginName(),user.getPassword());
@@ -64,8 +64,7 @@ public class UserAction {
                 online++;
                 session.getServletContext().setAttribute("online",online);
             }
-
-            return "home/index";// 后台主界面
+            return "redirect:/home_index.action"; //后台主界面
         }
     }
 
@@ -85,5 +84,28 @@ public class UserAction {
 
         return "user/logout";
     }
+
+
+    @RequestMapping("user_settingUI.action")
+    public String settingUI() {
+        return "user/settingUI";
+    }
+
+
+    @RequestMapping("user_setting.action")
+    public String setting(User model,HttpSession session) {
+        //因为设置的是当前用户，直接从session中取出即可
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            user.setName(model.getName());
+            user.setGender(model.getGender());
+            user.setPhoneNumber(model.getPhoneNumber());
+            user.setEmail(model.getEmail());
+            user.setDescription(model.getDescription());
+        }
+        return "user/optSuccess";
+    }
+
+
 
 }

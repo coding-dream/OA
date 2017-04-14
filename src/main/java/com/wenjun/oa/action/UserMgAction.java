@@ -13,8 +13,11 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -45,14 +48,21 @@ public class UserMgAction {
 
 
     @RequestMapping("/user_list.action")
-    public String list(Integer currentPage,Map map){
+    public String list(Integer currentPage, Map map, HttpSession session){
         // 分页显示
         if (currentPage == null ) {
             currentPage = Constants.PAGE_CURRENT_DEFAULT;
         }
 
-        String sql = "FROM User";
-        PageBean pageBean = userMgService.getPageBean(currentPage, Constants.PAGE_SIZE, sql, null);
+        //不查询自己
+        User user = (User) session.getAttribute("user");
+        List<Object> parameters = new ArrayList();
+        parameters.add(user);
+
+
+        //ASC DESC
+        String sql = "FROM User u WHERE u <> ? ORDER BY u.createTime DESC";
+        PageBean pageBean = userMgService.getPageBean(currentPage, Constants.PAGE_SIZE, sql, parameters);
         map.put("pageBean", pageBean);
         return "user/list";
     }
@@ -132,7 +142,7 @@ public class UserMgAction {
 
 
     @RequestMapping("/user_edit.action")
-    public String edit(User model,Long departmentId,Long [] roleIds) {
+    public String edit(User model, Long departmentId, Long [] roleIds, RedirectAttributes attrs) {
         // 1，从数据库中取出原对象
         User user = userMgService.getById(model.getId());
 

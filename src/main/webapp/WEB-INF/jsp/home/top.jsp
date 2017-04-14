@@ -31,7 +31,7 @@
 			</div>
 			<div id="Head1Right_UserDept"></div>
 			<div id="Head1Right_UserSetup">
-            	<a href="javascript:void(0)"><img border="0" width="22" height="22" src="${pageContext.request.contextPath}/static/images/ic_setting.png" /> 个人设置</a>
+            	<a href="user_settingUI.action" target="right"><img border="0" width="22" height="22" src="${pageContext.request.contextPath}/static/images/ic_setting.png" /> 个人设置</a>
 			</div>
 			<div id="Head1Right_Time">
 				</div>

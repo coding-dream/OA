@@ -1,0 +1,147 @@
+package com.wenjun.oa.bean;
+
+import javax.persistence.*;
+import java.util.Date;
+
+/**
+ * Created by wangli0 on 2017/4/14.
+ * github https://github.com/wangli0
+ * blog http://www.jianshu.com/u/79a88a044955
+ * website: http://need88.com
+ */
+
+@Entity
+public class Leave { //请假表
+    @Id
+    @Column(name = "leave_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    private int type; //1事假,2病假,3年假,4调休,5婚假,6产假,7陪产假,8路途假,9其他
+
+    private Date startTime;
+
+    private Date endTime;
+
+    private float days; //请假天数
+
+    private String reason;// 原因
+
+    private String picture;// 图片
+
+    private int result;// 1同意 2拒绝
+
+    private int status;// 1草稿  2正常发布
+
+    private Date createTime;//创建时间
+
+    private Date updateTime;//更新时间
+
+    private String approverIds;//审批人s...
+
+    private int userId; //请假人
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public float getDays() {
+        return days;
+    }
+
+    public void setDays(float days) {
+        this.days = days;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public int getResult() {
+        return result;
+    }
+
+    public void setResult(int result) {
+        this.result = result;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getApproverIds() {
+        return approverIds;
+    }
+
+    public void setApproverIds(String approverIds) {
+        this.approverIds = approverIds;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+}
