@@ -18,7 +18,7 @@ import java.util.Map;
  * website: http://need88.com
  */
 @Controller
-@Scope("prototype")  //当前Action的实例保证是多例模式，否则并发容易产生问题
+@Scope("prototype")  //当前Action的实例保证是多例模式，否则并发时容易产生问题，每一次请求均产生一个新的Action实例，如果使用单例模式，则容易产生某个用户的数据返回给另一个用户造成严重的bug
 public class TestAction {
 
     @Resource
@@ -31,7 +31,7 @@ public class TestAction {
 
     @RequestMapping("/test.action")
     public String testUI(Long age,User user){
-        System.out.println("Action："+this);
+
         System.out.println("age:"+age);
         System.out.println("user:"+user);
         return "test";
