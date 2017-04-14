@@ -19,6 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String loginName; // 登录名
     private String password; // 密码
     private String name; // 真实姓名

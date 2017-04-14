@@ -18,7 +18,7 @@ import java.util.Map;
  * website: http://need88.com
  */
 @Controller
-@Scope("prototype")
+@Scope("prototype")  //当前Action的实例保证是多例模式，否则并发容易产生问题
 public class TestAction {
 
     @Resource
@@ -31,6 +31,7 @@ public class TestAction {
 
     @RequestMapping("/test.action")
     public String testUI(Long age,User user){
+        System.out.println("Action："+this);
         System.out.println("age:"+age);
         System.out.println("user:"+user);
         return "test";
