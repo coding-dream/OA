@@ -14,7 +14,7 @@ import javax.persistence.Id;
 public class Message { // 通知消息表
     @Id
     @Column(name = "message_id")
-    private int id;
+    private Long id;
 
     private int ringsId;//铃声Id,资源文件
 
@@ -30,11 +30,11 @@ public class Message { // 通知消息表
 
     private int userId; // 该消息的归属者，即通知谁处理此消息
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

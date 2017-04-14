@@ -15,7 +15,7 @@ public class Leave { //请假表
     @Id
     @Column(name = "leave_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private int type; //1事假,2病假,3年假,4调休,5婚假,6产假,7陪产假,8路途假,9其他
 
@@ -39,13 +39,13 @@ public class Leave { //请假表
 
     private String approverIds;//审批人s...
 
-    private int userId; //请假人
+    private Long userId; //请假人
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -137,11 +137,11 @@ public class Leave { //请假表
         this.approverIds = approverIds;
     }
 
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 }

@@ -1,13 +1,16 @@
 package com.wenjun.oa.action;
 
 import com.wenjun.oa.bean.ApplyType;
+import com.wenjun.oa.bean.Leave;
+import com.wenjun.oa.bean.Message;
+import com.wenjun.oa.bean.User;
 import com.wenjun.oa.service.WorkflowService;
-import com.wenjun.oa.service.impl.WorkflowServiceImpl;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +29,6 @@ public class WorkflowAction {
     @Resource
     private WorkflowService workflowService ;
 
-
     // ===================================申请人===================================
 
     /** 申请类型选择（列表:请假 加班 报销 出差 外出 物品） */
@@ -43,28 +45,77 @@ public class WorkflowAction {
 
         map.put("applyTypeList", list);
 
-        return "applyTypeListUI";
+        return "flow/applyTypeListUI";
     }
 
+    /** 提交申请页面 */
+    @RequestMapping("/flow_submitUI.action")
+    public String submitUI() throws Exception {
+        return "submitUI";
+    }
 
-    
+    /** 提交申请 */
+    @RequestMapping("/flow_submit.action")
+    public String submit(HttpSession session) throws Exception {
+        // 封装申请信息
+        Leave leave = new Leave();
+        leave.setUserId(getCurrentUser(session).getId());
 
+        // 调用业务方法（保存申请信息，并启动流程开始流转）
+        workflowService.save(leave);
+        workflowService.submit(leave);
+        return "redirect:/flow_leaveList.action";// 成功后转到"我的申请查询"
+    }
 
-
-
-
+    /** 我的申请查询 */
+    @RequestMapping("/flow_leaveList.action")
+    public String myApplicationList() throws Exception {
+        return "flow/leaveList";
+    }
 
     // ===================================审批人===================================
 
+    /** 待我审批（我的 [消息/任务] 列表） */
+    @RequestMapping("/flow_myMessageList.action")
+    public String myMessageList(Map map,HttpSession session) throws Exception {
+
+        List<Message> messagesList = workflowService.getMessageList(getCurrentUser(session));
+        map.put("messageList", messagesList);
+        return "flow/myMessageList";
+    }
+
+    /** 审批处理页面 */
+    @RequestMapping("/flow_approveUI.action")
+    public String approveUI() throws Exception {
+        return "flow/approveUI";
+    }
+
+    /** 审批处理 */
+    @RequestMapping("/flow_approve.action")
+    public String approve() throws Exception {
+
+        //....
+
+        return "redirect:/flow_myMessageList.action";// // 成功后转到待我审批页面
+
+    }
+
+    /** 查看流转记录(查看自己审批过的记录) */
+    @RequestMapping("/flow_approveHistory.action")
+    public String approveHistory() throws Exception {
+        //准备数据
+
+
+        return "flow/approveHistory";
+    }
 
 
 
 
-
-
-
-
-
+    private User getCurrentUser(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        return user;
+    }
 
 
 

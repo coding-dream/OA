@@ -16,7 +16,7 @@ public class LeaveApprover { //审批表
 
     @Id
     @Column(name = "approver_id")
-    private int id;
+    private Long id;
 
     private String summary;// 说明
 
@@ -30,11 +30,11 @@ public class LeaveApprover { //审批表
 
     private int userId; //审批人ID
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
