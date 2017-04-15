@@ -1,7 +1,6 @@
 package com.wenjun.oa.bean;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 

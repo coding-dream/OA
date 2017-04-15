@@ -11,7 +11,7 @@ import javax.persistence.Id;
  * website: http://need88.com
  */
 @Entity
-public class Message { // 通知消息表
+public class Message  { // 通知消息表
     @Id
     @Column(name = "message_id")
     private Long id;

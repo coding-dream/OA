@@ -53,10 +53,10 @@
                             <div class="col-sm-10">
                                 <div class="input-group input-large custom-date-range" data-date="2016-07-07"
                                      data-date-format="yyyy-mm-dd">
-                                    <input type="text" class="form-control dpd1" name="started" placeholder="开始日期"
+                                    <input type="text" class="form-control dpd1" name="startTime" placeholder="开始日期"
                                            value="">
                                     <span class="input-group-addon">To</span>
-                                    <input type="text" class="form-control dpd2" name="ended" placeholder="结束日期"
+                                    <input type="text" class="form-control dpd2" name="endTime" placeholder="结束日期"
                                            value="">
                                 </div>
                             </div>

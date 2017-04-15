@@ -8,7 +8,7 @@ import java.util.List;
  * @author tyg
  *
  */
-public class PageBean {
+public class PageBean  {
 
 	// 指定的或是页面参数
 	private int currentPage; // 当前页

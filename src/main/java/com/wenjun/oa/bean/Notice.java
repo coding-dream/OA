@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Notice { //公告通知表
+public class Notice  { //公告通知表
 
     @Id
     @Column(name = "notice_id")

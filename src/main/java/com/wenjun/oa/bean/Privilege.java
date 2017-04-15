@@ -1,7 +1,5 @@
 package com.wenjun.oa.bean;
 
-import org.hibernate.annotations.Fetch;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +11,7 @@ import java.util.Set;
  * website: http://need88.com
  */
 @Entity
-public class Privilege {
+public class Privilege  {
     @Id
     @Column(name = "zj_privilege_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -11,7 +11,7 @@ import java.util.Date;
  */
 
 @Entity
-public class Leave { //请假表
+public class Leave  { //请假表
     @Id
     @Column(name = "leave_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
