@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -11,7 +12,12 @@
     <title>申请类型</title>
 </head>
 <body>
-    申请类型页面
+
+
+    <a href="flow_submitUI.action">请假</a>
+    <c:forEach var="type" items="${applyTypeList}">
+        <a href="${type.url}" >${type.name}</a>
+    </c:forEach>
 
 </body>
 </html>

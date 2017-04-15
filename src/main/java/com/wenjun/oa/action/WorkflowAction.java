@@ -51,7 +51,7 @@ public class WorkflowAction {
     /** 提交申请页面 */
     @RequestMapping("/flow_submitUI.action")
     public String submitUI() throws Exception {
-        return "submitUI";
+        return "flow/submitUI";
     }
 
     /** 提交申请 */
