@@ -1,5 +1,7 @@
 package com.wenjun.oa.bean;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,7 +13,7 @@ import java.util.Date;
  */
 
 @Entity
-public class Leave  { //请假表
+public class LeaveBean { //请假表
     @Id
     @Column(name = "leave_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +21,10 @@ public class Leave  { //请假表
 
     private int type; //1事假,2病假,3年假,4调休,5婚假,6产假,7陪产假,8路途假,9其他
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startTime;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endTime;
 
     private float days; //请假天数
@@ -59,14 +63,6 @@ public class Leave  { //请假表
 
     public Date getStartTime() {
         return startTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
     }
 
     public void setStartTime(Date startTime) {
@@ -129,6 +125,14 @@ public class Leave  { //请假表
         this.createTime = createTime;
     }
 
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
     public String getApproverIds() {
         return approverIds;
     }
@@ -143,5 +147,24 @@ public class Leave  { //请假表
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "Leave{" +
+                "id=" + id +
+                ", type=" + type +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", days=" + days +
+                ", reason='" + reason + '\'' +
+                ", picture='" + picture + '\'' +
+                ", result=" + result +
+                ", status=" + status +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", approverIds='" + approverIds + '\'' +
+                ", userId=" + userId +
+                '}';
     }
 }

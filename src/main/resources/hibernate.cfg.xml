@@ -22,7 +22,7 @@
 	<mapping class="com.wenjun.oa.bean.Department"/>
 	<mapping class="com.wenjun.oa.bean.Role"/>
 	<mapping class="com.wenjun.oa.bean.Privilege"/>
-	<mapping class="com.wenjun.oa.bean.Leave"/>
+	<mapping class="com.wenjun.oa.bean.LeaveBean"/>
 	<mapping class="com.wenjun.oa.bean.LeaveApprover"/>
 	<mapping class="com.wenjun.oa.bean.Message"/>
 	<mapping class="com.wenjun.oa.bean.Notice"/>

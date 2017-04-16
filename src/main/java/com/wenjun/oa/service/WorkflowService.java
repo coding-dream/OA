@@ -1,7 +1,7 @@
 package com.wenjun.oa.service;
 
 import com.wenjun.oa.base.BaseDao;
-import com.wenjun.oa.bean.Leave;
+import com.wenjun.oa.bean.LeaveBean;
 import com.wenjun.oa.bean.Message;
 import com.wenjun.oa.bean.User;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * blog http://www.jianshu.com/u/79a88a044955
  * website: http://need88.com
  */
-public interface WorkflowService extends BaseDao<Leave>{
+public interface WorkflowService extends BaseDao<LeaveBean>{
     /**
      * 提交申请：
      *
@@ -22,7 +22,7 @@ public interface WorkflowService extends BaseDao<Leave>{
      * 2，启动流程开始流转
      *
      */
-    void submit(Leave leave);
+    void submit(LeaveBean leave);
 
     /**
      * 查询我的消息列表

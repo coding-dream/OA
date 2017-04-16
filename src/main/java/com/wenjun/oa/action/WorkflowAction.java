@@ -1,7 +1,7 @@
 package com.wenjun.oa.action;
 
 import com.wenjun.oa.bean.ApplyType;
-import com.wenjun.oa.bean.Leave;
+import com.wenjun.oa.bean.LeaveBean;
 import com.wenjun.oa.bean.Message;
 import com.wenjun.oa.bean.User;
 import com.wenjun.oa.service.WorkflowService;
@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -50,15 +52,20 @@ public class WorkflowAction {
 
     /** 提交申请页面 */
     @RequestMapping("/flow_submitUI.action")
-    public String submitUI() throws Exception {
+    public String submitUI(Map map) throws Exception {
+        Date currentDate = new Date();
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sf.format(currentDate);
+        map.put("currentDate", date);
+
         return "flow/submitUI";
     }
 
     /** 提交申请 */
     @RequestMapping("/flow_submit.action")
-    public String submit(HttpSession session) throws Exception {
+    public String submit(LeaveBean leave,HttpSession session) throws Exception {
         // 封装申请信息
-        Leave leave = new Leave();
+        System.out.println(leave);
         leave.setUserId(getCurrentUser(session).getId());
 
         // 调用业务方法（保存申请信息，并启动流程开始流转）

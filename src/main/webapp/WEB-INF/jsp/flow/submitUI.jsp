@@ -30,7 +30,7 @@
                         </button>
                         <strong>注意!</strong> 请假单状态为正常后(可在列表操作中设置为“正常”)，就不能再编辑！后续流程等待审批人操作。.
                     </div>
-                    <form class="form-horizontal adminex-form" id="leave-form">
+                    <form action="flow_submit.action" class="form-horizontal adminex-form" id="leave-form">
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"><span>*</span>类型</label>
                             <div class="col-sm-10">
@@ -49,9 +49,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label"><span>*</span>请假日期</label>
+                            <label class="col-sm-2 col-sm-2 control-label"><span>*</span>请假日期a</label>
                             <div class="col-sm-10">
-                                <div class="input-group input-large custom-date-range" data-date="2016-07-07"
+                                <div class="input-group input-large custom-date-range" data-date="${currentDate}"
                                      data-date-format="yyyy-mm-dd">
                                     <input type="text" class="form-control dpd1" name="startTime" placeholder="开始日期"
                                            value="">

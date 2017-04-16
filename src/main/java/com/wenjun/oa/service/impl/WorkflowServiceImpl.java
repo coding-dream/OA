@@ -1,7 +1,7 @@
 package com.wenjun.oa.service.impl;
 
 import com.wenjun.oa.base.BaseDaoImpl;
-import com.wenjun.oa.bean.Leave;
+import com.wenjun.oa.bean.LeaveBean;
 import com.wenjun.oa.bean.Message;
 import com.wenjun.oa.bean.User;
 import com.wenjun.oa.service.WorkflowService;
@@ -16,16 +16,17 @@ import java.util.List;
  * website: http://need88.com
  */
 @Service
-public class WorkflowServiceImpl extends BaseDaoImpl<Leave> implements WorkflowService {
+public class WorkflowServiceImpl extends BaseDaoImpl<LeaveBean> implements WorkflowService {
 
     @Override
     public Class getEntityClass() {
-        return Leave.class;
+        return LeaveBean.class;
     }
 
 
     @Override
-    public void submit(Leave leave) {
+    public void submit(LeaveBean leave) {
+
 
     }
 
