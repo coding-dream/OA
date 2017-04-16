@@ -85,7 +85,10 @@ public class WorkflowAction {
         workflowService.submit(leave,user.getDepartment());
 
         //发送通知
+        String approverStr= leave.getApproverid();
+        String approvers [] = approverStr.split(",");
 
+        workflowService.sendMessage(user.getName()+"发来一条消息需要您的处理",approvers);
 
         return "redirect:/flow_leaveList.action";// 成功后转到"我的申请查询"
     }
@@ -121,8 +124,9 @@ public class WorkflowAction {
     /** 审批处理 */
     @RequestMapping("/flow_approve.action")
     public String approve() throws Exception {
-
         //....
+
+
 
         return "redirect:/flow_myMessageList.action";// // 成功后转到待我审批页面
 

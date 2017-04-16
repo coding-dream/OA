@@ -12,3 +12,6 @@
 
 3. Leave表和MySQL关键字 的冲突，导致建表失败，出现的令人困惑的错误！
 
+4. 粗心大意 实体首次忘记加    @GeneratedValue(strategy = GenerationType.IDENTITY)，后面修改后报
+java.sql.SQLException: Field 'message_id' doesn't have a default value,Hibernate并没有自动更新此字段属性，删除原表重启Tomcat即可
+

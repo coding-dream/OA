@@ -37,4 +37,6 @@ public interface WorkflowService extends BaseDao<LeaveBean>{
     List<LeaveBean> getLeaveListByUser(Long id);
 
     List<User> getApproversByDepart(User user, Department department);
+
+    void sendMessage(String title,String ...ids);
 }

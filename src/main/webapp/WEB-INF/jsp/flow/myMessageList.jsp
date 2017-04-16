@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -11,7 +12,11 @@
     <title>我的消息列表</title>
 </head>
 <body>
-    待我审批(我的消息列表)
+    <c:forEach var="message" items="${messageList}">
+        <a href="${message.url}">${message.title}</a>
+
+    </c:forEach>
+
 
 </body>
 </html>

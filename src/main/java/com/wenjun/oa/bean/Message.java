@@ -1,8 +1,7 @@
 package com.wenjun.oa.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by wangli0 on 2017/4/14.
@@ -12,8 +11,16 @@ import javax.persistence.Id;
  */
 @Entity
 public class Message  { // 通知消息表
+    public static final int MESSAGE_NO_WATCHED = 1;
+    public static final int MESSAGE_WATCHED = 2;
+
+    public static final int MESSAGE_TYPE_TASK = 1; // 任务(审批任务)
+    public static final int MESSAGE_TYPE_COMMENT = 2; //评论
+    public static final int MESSAGE_TYPE_REMIND= 3;// 提醒(已被审批)
+
     @Id
     @Column(name = "message_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private int ringsId;//铃声Id,资源文件
@@ -26,9 +33,9 @@ public class Message  { // 通知消息表
 
     private int watch;//1 未看，2 已看
 
-    private int createTime ;// 创建时间
+    private Date createTime ;// 创建时间
 
-    private int userId; // 该消息的归属者，即通知谁处理此消息
+    private Long userId; // 该消息的归属者，即通知谁处理此消息
 
     public Long getId() {
         return id;
@@ -78,19 +85,19 @@ public class Message  { // 通知消息表
         this.watch = watch;
     }
 
-    public int getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(int createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 }
