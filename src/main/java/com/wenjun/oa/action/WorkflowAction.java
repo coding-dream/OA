@@ -1,6 +1,5 @@
 package com.wenjun.oa.action;
 
-import com.google.gson.Gson;
 import com.wenjun.oa.bean.*;
 import com.wenjun.oa.service.LeaveApproverService;
 import com.wenjun.oa.service.MessageService;
@@ -9,7 +8,6 @@ import com.wenjun.oa.service.WorkflowService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -197,6 +195,9 @@ public class WorkflowAction {
                 } else {
                     leaveBean.setResult(LeaveBean.STATUS_AGREE);
                     workflowService.update(leaveBean);
+                    // 审批人都同意了，发送邮件或短信，可以走人了
+                    // MainManager.sendTo(User);
+
                 }
             }
 
