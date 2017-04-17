@@ -3,6 +3,7 @@ package com.wenjun.oa.action;
 import com.wenjun.oa.bean.Privilege;
 import com.wenjun.oa.bean.User;
 import com.wenjun.oa.service.UserService;
+import com.wenjun.oa.tool.TextUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -36,8 +38,11 @@ public class UserAction {
 
     //登录
     @RequestMapping("/user_login.action")
-    public String login(User user, HttpSession session ) {
-
+    public String login(User user, HttpSession session,Map map ) {
+        // 即使前台不传参数，User对象也不会为空
+        if (TextUtils.isEmpty(user.getLoginName()) || TextUtils.isEmpty(user.getPassword())) {
+            return "user/loginUI";
+        }
         if (session.getAttribute("user")!=null) {
             //已经登陆过
             return "redirect:/home_index.action"; //后台主界面

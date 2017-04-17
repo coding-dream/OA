@@ -5,6 +5,7 @@ import com.wenjun.oa.bean.Privilege;
 import com.wenjun.oa.bean.Role;
 import com.wenjun.oa.bean.User;
 import com.wenjun.oa.service.UserService;
+import com.wenjun.oa.tool.TextUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 
