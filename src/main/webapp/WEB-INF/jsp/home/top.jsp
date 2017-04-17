@@ -2,79 +2,53 @@
 <html>
 <head>
 	<title>TopMenu</title>
-	<%@ include file="/WEB-INF/jsp/common/commons.jspf"%>
-	<LINK href="${pageContext.request.contextPath}/style/blue/top.css" type=text/css rel=stylesheet>
-	
-	<script type="text/javascript">
-	</script>
-	<style type="text/css">
-		#messageArea{
-			color: white;
-			font-size: 14px;
-			font-weight: bold;
-		}
-	</style>
+	<%@ include file="/WEB-INF/jsp/common/adminLTE.jspf"%>
 </head>
 
-<body CLASS=PageBody leftmargin=0 topmargin=0 marginwidth=0 marginheight=0>
-	
-	<div id="Head1">
-		<div id="Logo">
-        	<iframe name="autoRefashion" src="" width="0" height="0"></iframe>
-			<a id="msgLink" href="javascript:void(0)"></a>
-            <font color="#0000CC" style="color:#F1F9FE; font-size:28px; font-family:Arial Black, Arial">文珺OA系统</font>
-			<!--<img border="0" src="css/blue/images/logo.png" />-->
+<body class="hold-transition skin-blue layout-top-nav">
+
+<header class="main-header">
+    <nav class="navbar navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-brand"><b>文珺</b>OA</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="upload_list.action" target="right">员工相册 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="javascript: window.parent.right.location.reload(true);">刷新</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- Messages: style can be found in dropdown.less-->
+                    <li class="messages-menu">
+                        <!-- Menu toggle button -->
+                        <a href="${pageContext.request.contextPath}/flow_myMessageList.action?disable=false" target="right">
+                            <i class="fa fa-envelope-o"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="user_settingUI.action" target="right" >个人资料</a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/user_logout.action" target="_parent">注销</a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /.navbar-custom-menu -->
         </div>
-		<div id="Head1Right">
-			<div id="Head1Right_UserName">
-                <img border="0" width="22" height="22" src="${pageContext.request.contextPath}/static/images/ic_user.png" /> 您好，<b>${user.name }</b>
-			</div>
-			<div id="Head1Right_UserDept"></div>
-			<div id="Head1Right_UserSetup">
-            	<a href="user_settingUI.action" target="right"><img border="0" width="22" height="22" src="${pageContext.request.contextPath}/static/images/ic_setting.png" /> 个人设置</a>
-			</div>
-			<div id="Head1Right_Time">
-				</div>
-		</div>
-        <div id="Head1Right_SystemButton">
-            <a href="${pageContext.request.contextPath}/user_logout.action" target="_parent">
-                <img width="22" height="22" alt="退出系统" src="${pageContext.request.contextPath}/static/images/ic_quit.png" />
-            </a>
-        </div>
-        <div id="Head1Right_Button">
-            <a target="desktop" href="javascript:void(0)">
-                <img width="65" height="20" alt="显示桌面" src="${pageContext.request.contextPath}/style/blue/images/top/desktop.gif" />
-            </a>
-        </div>
-	</div>
-    
-    <div id="Head2">
-        <div id="Head2_Awoke">
-            <ul id="AwokeNum">
-                <li><a target="right" href="javascript:alert('message');"><img border="0" width="11" height="13" src="${pageContext.request.contextPath}/style/images/top/msg.gif" /> 消息<span id="msg"></span></a></li>
-                <li class="Line"></li>
-                <li><a target="right" href="upload_list.action"><img border="0" width="16" height="11" src="${pageContext.request.contextPath}/style/images/top/mail.gif" /> 员工相册<span id="mail"></span></a></li>
-                <li class="Line"></li>
-                
-                <!-- 是否有待审批文档的提示1 -->
-                <li><a href="${pageContext.request.contextPath}/flow_myMessageList.action?disable=false" target="right">
-                		<img border="0" width="12" height="14" src="${pageContext.request.contextPath}/style/images/top/wait.gif" /> 
-                		我的消息（<span id="wait" class="taskListSize">0</span>）
-                	</a>
-                </li>
-                <li class="Line"></li>
-                
-                <!-- 是否有待审批文档的提示2 -->
-                <li id="messageArea"></li>
-            </ul>
-        </div>
-        
-        <div id="Head2_FunctionList" style="text-align: left">
-        	<a href="javascript: window.parent.right.location.reload(true);">
-                刷新
-            </a>
-        </div>
-    </div>
+        <!-- /.container-fluid -->
+    </nav>
+</header>
 
 </body>
 

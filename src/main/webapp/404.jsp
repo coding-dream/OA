@@ -1,20 +1,23 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: wangli
-  Date: 2017/2/18
-  Time: 22:50
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>404</title>
+    <%@ include file="/WEB-INF/jsp/common/adminLTE.jspf" %>
+
   </head>
   <body>
+  <div style="text-align: center;">
+    <img src="${pageContext.request.contextPath}/static/images/404.png"/>
+  </div>
 
-    <center>
-      <h1>404 not Found</h1>
-    </center>
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 1.0.0
+    </div>
+    <strong>Copyright &copy; 2016-2017 <a href="${pageContext.request.contextPath}/home_index.action">文珺OA系统</a>.</strong> All rights
+    reserved.
+  </footer>
+
 
   </body>
 </html>

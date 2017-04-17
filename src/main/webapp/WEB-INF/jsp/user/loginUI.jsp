@@ -20,7 +20,7 @@
 
 <div class="login-box">
     <div class="login-logo">
-        <a href="javascript:void(0);"><b>文珺</b>OA</a>
+        <a href="javascript:void(0);">文珺OA系统</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">

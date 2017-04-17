@@ -14,8 +14,7 @@
 </span></div>
 
     <div id="Info">
-    	<a href="http://www.localhost:8080" title = "文珺OA系统" target=_blank >文珺OA系统</a> |
-        <a href="http://www.localhost:8080" title = "文珺OA系统" target=_blank >文珺OA系统</a>
+    	<a href="${pageContext.request.contextPath}/home_index.action" title = "文珺OA系统" target=_blank >文珺OA系统</a> |
     </div>
 
     <DIV id=DesktopText>

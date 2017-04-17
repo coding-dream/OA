@@ -14,7 +14,7 @@
 
 </head>
 
-	<frameset rows="100,*,25" framespacing=0 border=0 frameborder="0">
+	<frameset rows="70,*,35" framespacing=0 border=0 frameborder="0">
 		<frame noresize name="TopMenu" scrolling="no" src="${pageContext.request.contextPath}/home_top.action">
 		<frameset cols="180,*" id="resize">
 			<frame noresize name="menu" scrolling="yes" src="${pageContext.request.contextPath}/home_left.action">
