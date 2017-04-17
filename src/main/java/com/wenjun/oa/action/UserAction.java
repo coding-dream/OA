@@ -87,7 +87,7 @@ public class UserAction {
             session.getServletContext().setAttribute("online",online);
         }
 
-        return "user/logout";
+        return "user/loginUI";
     }
 
 
