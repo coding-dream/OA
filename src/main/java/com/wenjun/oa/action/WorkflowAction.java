@@ -1,11 +1,9 @@
 package com.wenjun.oa.action;
 
 import com.wenjun.oa.bean.*;
-import com.wenjun.oa.service.LeaveApproverService;
-import com.wenjun.oa.service.MessageService;
-import com.wenjun.oa.service.UserService;
-import com.wenjun.oa.service.WorkflowService;
+import com.wenjun.oa.service.*;
 import com.wenjun.oa.service.impl.LeaveApproverServiceImpl;
+import com.wenjun.oa.service.impl.LeaveProgressServiceImpl;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +35,10 @@ public class WorkflowAction {
 
     @Resource
     private LeaveApproverService leaveApproverService;
+
+    @Resource
+    private LeaveProgressService leaveProgressService ;
+    
 
     // ===================================申请人===================================
 
@@ -153,7 +155,11 @@ public class WorkflowAction {
         message.setDisable(true);
         messageService.update(message);
 
+        model.setCreateTime(new Date());
         leaveApproverService.save(model);
+
+        // 进度条
+
 
         return "redirect:/flow_myMessageList.action";// // 成功后转到待我审批页面
 

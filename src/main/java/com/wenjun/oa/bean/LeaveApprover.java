@@ -1,8 +1,6 @@
 package com.wenjun.oa.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -16,6 +14,7 @@ public class LeaveApprover { //审批表
 
     @Id
     @Column(name = "approver_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String summary;// 说明

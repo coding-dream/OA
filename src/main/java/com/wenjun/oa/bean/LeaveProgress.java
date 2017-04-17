@@ -19,6 +19,8 @@ public class LeaveProgress {
 
     private List<String> results;
 
+    private boolean done; // 是否完成
+
     private Long leaveId;
 
     public Long getId() {
@@ -43,5 +45,13 @@ public class LeaveProgress {
 
     public void setLeaveId(Long leaveId) {
         this.leaveId = leaveId;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 }

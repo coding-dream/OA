@@ -32,9 +32,10 @@
 
              <input type="hidden" name="leaveId" value="${leaveBean.id}"/>请假表ID <br/>
              <input type="hidden" name="userId" value="${message.userId}"/>审批人ID <br/>
-             <input type="radio" name="status" value="agree" checked/>同意 <br/>
-             <input type="radio" name="status" value="reject"/>拒绝<br/>
-             <input type="text" name="summary" value="agree"/><br/>
+             <input type="radio" name="status" value="1" checked/>同意 <br/>
+             <input type="radio" name="status" value="2"/>拒绝<br/>
+             <input type="text" name="summary" /><br/>
+             <input type="submit" value="提交"/>
 
          </form>
 

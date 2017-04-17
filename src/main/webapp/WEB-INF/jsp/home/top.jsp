@@ -57,7 +57,7 @@
                 <li class="Line"></li>
                 
                 <!-- 是否有待审批文档的提示1 -->
-                <li><a href="${pageContext.request.contextPath}/flow_myMessageList.action" target="right">
+                <li><a href="${pageContext.request.contextPath}/flow_myMessageList.action?disable=false" target="right">
                 		<img border="0" width="12" height="14" src="${pageContext.request.contextPath}/style/images/top/wait.gif" /> 
                 		我的消息（<span id="wait" class="taskListSize">0</span>）
                 	</a>
