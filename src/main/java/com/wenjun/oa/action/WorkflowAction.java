@@ -121,9 +121,9 @@ public class WorkflowAction {
 
     /** 待我审批（我的 [消息/任务] 列表） */
     @RequestMapping("/flow_myMessageList.action")
-    public String myMessageList(Map map,HttpSession session) throws Exception {
+    public String myMessageList(Map map,boolean disable,HttpSession session) throws Exception {
 
-        List<Message> messagesList = messageService.getMessageList(getCurrentUser(session),false);
+        List<Message> messagesList = messageService.getMessageList(getCurrentUser(session),disable);
         map.put("messageList", messagesList);
         return "flow/myMessageList";
     }
@@ -158,17 +158,6 @@ public class WorkflowAction {
         return "redirect:/flow_myMessageList.action";// // 成功后转到待我审批页面
 
     }
-
-    /** 查看流转记录(查看自己审批过的记录) */
-    @RequestMapping("/flow_approveHistory.action")
-    public String approveHistory(Map map,HttpSession session) throws Exception {
-        //准备数据
-        List<Message> messages = messageService.getMessageList(getCurrentUser(session),true);
-        map.put("messageList", messages);
-        return "flow/myMessageList";
-    }
-
-
 
 
     private User getCurrentUser(HttpSession session){
