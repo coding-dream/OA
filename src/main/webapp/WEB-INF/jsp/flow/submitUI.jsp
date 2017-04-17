@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -14,6 +15,8 @@
           rel="stylesheet"/>
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/static/datepicker-custom/datepicker-custom.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/static/js/wj.js"></script>
 
 
 </head>
@@ -75,6 +78,12 @@
                             </div>
                         </div>
 
+
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">审批人(点击头像可删除)</label>
+                            <div class="col-sm-10 js-selectuserbox"> <a class="addAvatar" href="#acceptModal" data-toggle="modal"><i class="fa fa-plus-circle"></i></a> </div>
+                        </div>
+
                         <div class="form-group">
                             <label class="col-lg-2 col-sm-2 control-label"></label>
                             <div class="col-lg-10">
@@ -91,6 +100,81 @@
 </div>
 
 
+<!--Dialog -->
+
+<div aria-hidden="true" aria-labelledby="acceptModalLabel" role="dialog" tabindex="-1" id="acceptModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">审批人</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="list-unstyled">
+                    <c:forEach var="approver" items="${approvers}">
+                        <li><a href="javascript:;" data-id="${approver.id}" data-name="${approver.name}" class="js-selectuser"><img src="${pageContext.request.contextPath}/static/images/ic_profle.png">${approver.name}（${approver.rolesName}）</a></li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .modal-body{ max-height: 470px;    overflow: auto;}
+    .modal-body img{width:50px;height:50px;    border-radius: 50%;margin-right:20px;}
+    .modal-body li {    margin-bottom: 6px;    border-bottom: 1px #ddd solid;    padding-bottom: 6px;}
+    .modal-body a{display:block;    text-decoration: none;}
+</style>
+<script>
+    $(function () {
+
+        $('.js-selectuser').on('click', function(){
+            var that = $(this);
+            var userid = that.attr('data-id');
+            var realname = that.attr('data-name');
+            var avatar = that.find('img').attr('src');
+
+            var approverid = $('#approverid').val();
+            if(approverid.indexOf(userid) > 0 ){
+                $('#acceptModal').modal('hide')
+                dialogInfo('审批人已经添加过');
+                return false;
+            }
+
+            var html = '';
+            html += '<a href="javascript:;" data-id="'+userid+'"><img src="'+avatar+'" width="33" height="33"><span>'+realname+'</span></a><span>..........</span>';
+            if ($('.js-selectuserbox').find('a img').size()) {
+                $('.addAvatar').before(html);
+            } else {
+                $('.js-selectuserbox').prepend(html);
+            }
+            $('#approverid').val(approverid+','+userid);//把所有approve审批人追加，逗号分隔
+
+            $('#acceptModal').modal('hide')
+        });
+
+        $('.js-selectuserbox').delegate('a img', 'click',function(){
+            var that = $(this);
+
+            var approverid = $('#approverid').val();
+            var userid = that.parent().attr('data-id');
+            result = approverid.replace(eval("/,?"+userid+",?/"),' ').trim(' ').replace(' ',',');
+            $('#approverid').val(result);
+
+            that.parent().next('span').remove();
+            that.parent().remove();
+        });
+
+
+        $('.addAvatar').on('show.bs.modal', function (e) {
+        })
+    });
+</script>
+<!--Dialog -->
+
+
+<!-- DatePicker -->
 <script>
     $(function () {
         var nowTemp = new Date();
@@ -120,6 +204,7 @@
         }).data('datepicker');
     })
 </script>
+<!-- DatePicker -->
 
 </body>
 </html>

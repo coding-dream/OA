@@ -18,7 +18,7 @@ public class Message  { // 通知消息表
 
     private int ringsId;//铃声Id,资源文件
 
-    private int type;//消息类型:1.评论，2.赞，3.审批 等等，发邮件的形式,如简书
+    private int type;//消息类型:1.待审批，2.评论，3.已被xx审批 等等，发邮件的形式,如简书
 
     private String title;//消息标题
 

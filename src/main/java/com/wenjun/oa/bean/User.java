@@ -28,6 +28,9 @@ public class User {
     private String email; // 电子邮件
     private String description; // 说明
 
+    @Transient
+    private String rolesName; //角色名称(经理，项目经理)
+
     private Date createTime; //注册时间
 
     //本类与 Department的多对一
@@ -41,7 +44,7 @@ public class User {
      * ManyTo 本方为Many一方(从表)，可以设置cascade属性，主表删除，则从表级联删除
      * 多对多情况下，两端才同时控制关联，两端使用@JoinTable设置中间表。其他的情况只需一端控制使永@JoinColumn即可
      */
-    @ManyToMany(targetEntity = Role.class,fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = Role.class,fetch = FetchType.EAGER)
     @JoinTable(
             name = "center_user_role",
             joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "zj_user_id"),
@@ -138,6 +141,13 @@ public class User {
         this.createTime = createTime;
     }
 
+    public String getRolesName() {
+        return rolesName;
+    }
+
+    public void setRolesName(String rolesName) {
+        this.rolesName = rolesName;
+    }
 
     @Override
     public String toString() {
@@ -150,8 +160,6 @@ public class User {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", description='" + description + '\'' +
-                ", department=" + department +
-                ", roles=" + roles +
                 '}';
     }
 

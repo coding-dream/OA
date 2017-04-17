@@ -75,4 +75,5 @@ public class Role {
     public void setPrivileges(Set<Privilege> privileges) {
         this.privileges = privileges;
     }
+
 }

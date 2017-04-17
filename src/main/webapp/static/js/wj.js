@@ -26,3 +26,27 @@ function is_mobile() {
 }
 
 
+
+function dialogInfo(msg) {
+    $('#dialogInfo').remove();
+    var html = '';
+    html = '<div class="modal fade" id="dialogInfo" tabindex="-1" role="dialog" aria-labelledby="dialogInfoTitle">';
+    html += '<div class="modal-dialog" role="document">';
+    html += '<div class="modal-content">';
+    html += '<div class="modal-header">';
+    html += '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+    html += '<h4 class="modal-title" id="dialogInfoTitle">文珺OA提示</h4>';
+    html += ' </div>';
+    html += '<div class="modal-body">';
+    html += '<p>'+msg+'</p>';
+    html += '</div>';
+    //html += '<div class="modal-footer">';
+    //html += ' <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
+    //html += ' <button type="button" class="btn btn-primary">Send message</button>';
+    //html += '</div>';
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
+    $('body').append(html);
+    $('#dialogInfo').modal('show')
+}

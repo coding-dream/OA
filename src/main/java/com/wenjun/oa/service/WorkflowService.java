@@ -1,6 +1,7 @@
 package com.wenjun.oa.service;
 
 import com.wenjun.oa.base.BaseDao;
+import com.wenjun.oa.bean.Department;
 import com.wenjun.oa.bean.LeaveBean;
 import com.wenjun.oa.bean.Message;
 import com.wenjun.oa.bean.User;
@@ -22,7 +23,7 @@ public interface WorkflowService extends BaseDao<LeaveBean>{
      * 2，启动流程开始流转
      *
      */
-    void submit(LeaveBean leave);
+    void submit(LeaveBean leave,Department depart);
 
     /**
      * 查询我的消息列表
@@ -33,4 +34,7 @@ public interface WorkflowService extends BaseDao<LeaveBean>{
     List<Message> getMessageList(User currentUser);
 
 
+    List<LeaveBean> getLeaveListByUser(Long id);
+
+    List<User> getApproversByDepart(User user, Department department);
 }

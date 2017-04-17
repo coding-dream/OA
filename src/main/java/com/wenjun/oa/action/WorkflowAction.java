@@ -1,9 +1,6 @@
 package com.wenjun.oa.action;
 
-import com.wenjun.oa.bean.ApplyType;
-import com.wenjun.oa.bean.LeaveBean;
-import com.wenjun.oa.bean.Message;
-import com.wenjun.oa.bean.User;
+import com.wenjun.oa.bean.*;
 import com.wenjun.oa.service.WorkflowService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -12,10 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by wangli0 on 2017/4/14.
@@ -52,12 +46,28 @@ public class WorkflowAction {
 
     /** 提交申请页面 */
     @RequestMapping("/flow_submitUI.action")
-    public String submitUI(Map map) throws Exception {
+    public String submitUI(Map map,HttpSession session) throws Exception {
         Date currentDate = new Date();
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sf.format(currentDate);
         map.put("currentDate", date);
 
+        User user = getCurrentUser(session);
+        List<User> approvers = workflowService.getApproversByDepart(user,user.getDepartment());
+        for (User approver : approvers) {
+
+            Set<Role> roles  = approver.getRoles();
+            StringBuffer stringBuffer = new StringBuffer();
+            for (Role r : roles) {
+                stringBuffer.append(r.getName()+",");
+            }
+            String rolesName  =  stringBuffer.toString();
+            approver.setRolesName(rolesName.substring(0,rolesName.length()-1));
+
+        }
+
+
+        map.put("approvers", approvers);
         return "flow/submitUI";
     }
 
@@ -65,18 +75,29 @@ public class WorkflowAction {
     @RequestMapping("/flow_submit.action")
     public String submit(LeaveBean leave,HttpSession session) throws Exception {
         // 封装申请信息
-        System.out.println(leave);
-        leave.setUserId(getCurrentUser(session).getId());
+        User user = getCurrentUser(session);
+
+        leave.setCreateTime(new Date());
+        leave.setUserId(user.getId());
 
         // 调用业务方法（保存申请信息，并启动流程开始流转）
         workflowService.save(leave);
-        workflowService.submit(leave);
+        workflowService.submit(leave,user.getDepartment());
+
+        //发送通知
+
+
         return "redirect:/flow_leaveList.action";// 成功后转到"我的申请查询"
     }
 
     /** 我的申请查询 */
     @RequestMapping("/flow_leaveList.action")
-    public String myApplicationList() throws Exception {
+    public String flow_leaveList(HttpSession session,Map map) throws Exception {
+        User user = getCurrentUser(session);
+        System.out.println("user" + user);
+        List<LeaveBean> list = workflowService.getLeaveListByUser(user.getId());
+        map.put("leaveList", list);
+
         return "flow/leaveList";
     }
 

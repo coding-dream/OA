@@ -55,7 +55,7 @@ public class DepartmentAction {
          * 而使用addAttribute，因为您添加的对象会转换为正常 请求参数，你非常受限于String或primitives等对象类型。
          */
         attr.addFlashAttribute("parentId", parentId);
-        return "redirect:/department_list.action";
+        return "redirect:/department_list.action";// 重定向带参数
     }
 
     @RequestMapping("/department_addUI.action")
@@ -68,13 +68,15 @@ public class DepartmentAction {
     }
 
     @RequestMapping("/department_add.action")
-    public String add(Department model,Long parentId) throws Exception {
+    public String add(Department model,Long parentId,RedirectAttributes attributes) throws Exception {
 
         Department parent = departmentService.getById(parentId);
         model.setParent(parent);
         // 保存
         departmentService.save(model);
-        return "redirect:/department_list.action";
+
+        attributes.addFlashAttribute("parentId", parentId);
+        return "redirect:/department_list.action";// 重定向带参数
     }
 
     @RequestMapping("/department_editUI.action")
@@ -96,7 +98,7 @@ public class DepartmentAction {
     }
 
     @RequestMapping("/department_edit.action")
-    public String edit(Long parentId,Department model) throws Exception {
+    public String edit(Long parentId,Department model,RedirectAttributes attributes) throws Exception {
         // 1，从数据库取出原对象
         Department department = departmentService.getById(model.getId());
 
@@ -107,6 +109,8 @@ public class DepartmentAction {
 
         // 3，更新到数据库中
         departmentService.update(department);
+
+        attributes.addFlashAttribute("parentId", parentId);// 重定向带参数
         return "redirect:/department_list.action";
     }
 

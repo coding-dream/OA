@@ -52,7 +52,7 @@ public class UserAction {
             //准备权限数据
             List<Privilege> topPrivilegeList = (List<Privilege>) session.getServletContext().getAttribute("topPrivilegeList");
 
-            List<Privilege> copyPrivileges = userService.preparePrivileges(user,topPrivilegeList);
+            List<Privilege> copyPrivileges = userService.preparePrivileges(u,topPrivilegeList);
             session.setAttribute("privileges", copyPrivileges );
 
             System.out.println("privileges:"+copyPrivileges );

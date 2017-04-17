@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -12,8 +13,17 @@
 </head>
 <body>
 
-请假列表
 
+    <table>
+        <c:forEach var="leave" items="${leaveList}">
+            <td>
+                <tr>${leave.id}</tr>
+                <tr>${leave.type}</tr>
+                <tr>${leave.startTime}</tr>
+                <tr>${leave.reason}</tr>
+            </td>
+        </c:forEach>
+    </table>
 
 
 

@@ -14,6 +14,9 @@ import java.util.Date;
 
 @Entity
 public class LeaveBean { //请假表
+    public static final int STATUS_DRAFT = 0;//草稿
+    public static final int STATUS_NOMAL = 1; //正常发布
+
     @Id
     @Column(name = "leave_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +44,7 @@ public class LeaveBean { //请假表
 
     private Date updateTime;//更新时间
 
-    private String approverIds;//审批人s...
+    private String approverid;//审批人s...
 
     private Long userId; //请假人
 
@@ -133,12 +136,12 @@ public class LeaveBean { //请假表
         this.updateTime = updateTime;
     }
 
-    public String getApproverIds() {
-        return approverIds;
+    public String getApproverid() {
+        return approverid;
     }
 
-    public void setApproverIds(String approverIds) {
-        this.approverIds = approverIds;
+    public void setApproverid(String approverid) {
+        this.approverid = approverid;
     }
 
     public Long getUserId() {
@@ -163,7 +166,7 @@ public class LeaveBean { //请假表
                 ", status=" + status +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
-                ", approverIds='" + approverIds + '\'' +
+                ", approverIds='" + approverid + '\'' +
                 ", userId=" + userId +
                 '}';
     }
