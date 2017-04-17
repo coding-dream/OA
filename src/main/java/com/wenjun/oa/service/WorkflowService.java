@@ -25,18 +25,8 @@ public interface WorkflowService extends BaseDao<LeaveBean>{
      */
     void submit(LeaveBean leave,Department depart);
 
-    /**
-     * 查询我的消息列表
-     *
-     * @param currentUser
-     * @return
-     */
-    List<Message> getMessageList(User currentUser);
-
-
     List<LeaveBean> getLeaveListByUser(Long id);
 
     List<User> getApproversByDepart(User user, Department department);
 
-    void sendMessage(String title,String ...ids);
 }

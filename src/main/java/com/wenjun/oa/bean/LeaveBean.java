@@ -36,7 +36,7 @@ public class LeaveBean { //请假表
 
     private String picture;// 图片
 
-    private int result;// 1同意 2拒绝
+    private int result;// 0处理中，1同意 2拒绝
 
     private int status;// 1草稿  2正常发布
 
@@ -47,6 +47,8 @@ public class LeaveBean { //请假表
     private String approverid;//审批人s...
 
     private Long userId; //请假人
+
+    private Long progressId; // 进度
 
     public Long getId() {
         return id;
@@ -146,6 +148,14 @@ public class LeaveBean { //请假表
 
     public Long getUserId() {
         return userId;
+    }
+
+    public Long getProgressId() {
+        return progressId;
+    }
+
+    public void setProgressId(Long progressId) {
+        this.progressId = progressId;
     }
 
     public void setUserId(Long userId) {

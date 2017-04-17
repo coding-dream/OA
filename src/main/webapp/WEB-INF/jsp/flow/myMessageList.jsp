@@ -13,8 +13,7 @@
 </head>
 <body>
     <c:forEach var="message" items="${messageList}">
-        <a href="${message.url}">${message.title}</a>
-
+        <a href="flow_approveUI.action?messageId=${message.id}">${message.title}</a>
     </c:forEach>
 
 

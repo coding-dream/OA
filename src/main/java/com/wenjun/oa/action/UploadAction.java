@@ -3,6 +3,7 @@ package com.wenjun.oa.action;
 import com.wenjun.oa.bean.Photo;
 import com.wenjun.oa.bean.User;
 import com.wenjun.oa.service.UploadService;
+import com.wenjun.oa.tool.FormVerifyUtils;
 import com.wenjun.oa.tool.TextUtils;
 import org.apache.commons.io.FileUtils;
 import org.springframework.context.annotation.Scope;
@@ -56,9 +57,29 @@ public class UploadAction {
         return "upload/list";
     }
 
+    @RequestMapping("/photo_delete.action")
+    public String delete(Long id){
+        //删除文件
+        Photo photo = uploadService.getById(id);
+        String url = photo.getUrl();
+        File file = new File(url);
+        if (file.exists()) {
+            boolean flag = file.delete();
+            System.out.println("delete photo "+flag);
+        }
+        //删除数据
+        uploadService.delete(id);
+        return "redirect:/upload_list.action";
+    }
+
 
     @RequestMapping("/upload.action")
     public String upload(MultipartFile file, HttpSession session,Map map) throws IOException {
+
+        if(!FormVerifyUtils.checkUpload(file)){
+            map.put("error", "参数有误");
+            return "upload/uploadUI";
+        }
 
         User currentUser = (User) session.getAttribute("user");
         String name = file.getName();

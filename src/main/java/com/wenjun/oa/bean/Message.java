@@ -29,13 +29,15 @@ public class Message  { // 通知消息表
 
     private String title;//消息标题
 
-    private String url;// 消息的url
-
     private int watch;//1 未看，2 已看
 
     private Date createTime ;// 创建时间
 
     private Long userId; // 该消息的归属者，即通知谁处理此消息
+
+    private Long leaveId;
+
+    private boolean disable;// 已被处理，不可再次被处理
 
     public Long getId() {
         return id;
@@ -69,16 +71,16 @@ public class Message  { // 通知消息表
         this.title = title;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public int getWatch() {
         return watch;
+    }
+
+    public Long getLeaveId() {
+        return leaveId;
+    }
+
+    public void setLeaveId(Long leaveId) {
+        this.leaveId = leaveId;
     }
 
     public void setWatch(int watch) {
@@ -95,6 +97,14 @@ public class Message  { // 通知消息表
 
     public Long getUserId() {
         return userId;
+    }
+
+    public boolean getDisable() {
+        return disable;
+    }
+
+    public void setDisable(boolean disable) {
+        this.disable = disable;
     }
 
     public void setUserId(Long userId) {

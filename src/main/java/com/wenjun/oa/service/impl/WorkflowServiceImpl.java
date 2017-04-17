@@ -42,15 +42,6 @@ public class WorkflowServiceImpl extends BaseDaoImpl<LeaveBean> implements Workf
 
     }
 
-    @Override
-    public List<Message> getMessageList(User currentUser) {
-
-        return getCurrentSession()
-                .createQuery("FROM Message m WHERE m.userId = ?")
-                .setParameter(0, currentUser.getId())
-                .list();
-
-    }
 
     @Override
     public List<LeaveBean> getLeaveListByUser(Long id) {
@@ -71,33 +62,6 @@ public class WorkflowServiceImpl extends BaseDaoImpl<LeaveBean> implements Workf
 
         return users;
     }
-
-    //发送Message消息
-    @Override
-    public void sendMessage(String title,String...userIds){
-        //发送邮件
-
-        Message message = null;
-        // 添加Message 表记录
-        for (String userid : userIds) {
-            if (!"".equals(userid) && null != userid) {
-                message = new Message();
-                message.setTitle(title);
-                message.setCreateTime(new Date());
-                message.setWatch(Message.MESSAGE_NO_WATCHED);
-                message.setType(Message.MESSAGE_TYPE_TASK);
-                message.setUrl("flow_approveUI.action");
-                message.setUserId(Long.parseLong(userid));
-
-                getCurrentSession().save(message);
-
-            }
-        }
-
-
-
-    }
-
 
 
     public Session getCurrentSession(){

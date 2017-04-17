@@ -17,7 +17,7 @@
     </div>
 
     <form action="upload.action" method="post" enctype="multipart/form-data">
-        <input name="file" placeholder="文件上传" type="file"/><br/>
+        <input name="file" placeholder="文件上传" type="file" value="nofile"/><br/>
         <input type="submit" value="上传"/>
     </form>
 

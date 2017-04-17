@@ -1,7 +1,11 @@
 package com.wenjun.oa.action;
 
 import com.wenjun.oa.bean.*;
+import com.wenjun.oa.service.LeaveApproverService;
+import com.wenjun.oa.service.MessageService;
+import com.wenjun.oa.service.UserService;
 import com.wenjun.oa.service.WorkflowService;
+import com.wenjun.oa.service.impl.LeaveApproverServiceImpl;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +28,15 @@ public class WorkflowAction {
 
     @Resource
     private WorkflowService workflowService ;
+
+    @Resource
+    private MessageService messageService ;
+
+    @Resource
+    private UserService userService;
+
+    @Resource
+    private LeaveApproverService leaveApproverService;
 
     // ===================================申请人===================================
 
@@ -88,7 +101,7 @@ public class WorkflowAction {
         String approverStr= leave.getApproverid();
         String approvers [] = approverStr.split(",");
 
-        workflowService.sendMessage(user.getName()+"发来一条消息需要您的处理",approvers);
+        messageService.sendMessage(leave.getId(),user.getName()+"发来一条消息需要您的处理",approvers);
 
         return "redirect:/flow_leaveList.action";// 成功后转到"我的申请查询"
     }
@@ -110,23 +123,37 @@ public class WorkflowAction {
     @RequestMapping("/flow_myMessageList.action")
     public String myMessageList(Map map,HttpSession session) throws Exception {
 
-        List<Message> messagesList = workflowService.getMessageList(getCurrentUser(session));
+        List<Message> messagesList = messageService.getMessageList(getCurrentUser(session),false);
         map.put("messageList", messagesList);
         return "flow/myMessageList";
     }
 
     /** 审批处理页面 */
     @RequestMapping("/flow_approveUI.action")
-    public String approveUI() throws Exception {
+    public String approveUI(Long messageId,Map map) throws Exception {
+        Message message = messageService.getById(messageId);
+
+        Long leaveId = message.getLeaveId();
+        LeaveBean leaveBean = workflowService.getById(leaveId);
+
+        Long userId = message.getUserId();
+        User leaveUser = userService.getById(userId);
+
+
+        map.put("message", message);
+        map.put("leaveBean", leaveBean);
+        map.put("leaveUser", leaveUser);
         return "flow/approveUI";
     }
 
     /** 审批处理 */
     @RequestMapping("/flow_approve.action")
-    public String approve() throws Exception {
-        //....
+    public String approve(Long messageId,LeaveApprover model) throws Exception {
+        Message message = messageService.getById(messageId);
+        message.setDisable(true);
+        messageService.update(message);
 
-
+        leaveApproverService.save(model);
 
         return "redirect:/flow_myMessageList.action";// // 成功后转到待我审批页面
 
@@ -134,11 +161,11 @@ public class WorkflowAction {
 
     /** 查看流转记录(查看自己审批过的记录) */
     @RequestMapping("/flow_approveHistory.action")
-    public String approveHistory() throws Exception {
+    public String approveHistory(Map map,HttpSession session) throws Exception {
         //准备数据
-
-
-        return "flow/approveHistory";
+        List<Message> messages = messageService.getMessageList(getCurrentUser(session),true);
+        map.put("messageList", messages);
+        return "flow/myMessageList";
     }
 
 

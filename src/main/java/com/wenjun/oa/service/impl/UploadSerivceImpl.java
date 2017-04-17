@@ -33,7 +33,7 @@ public class UploadSerivceImpl extends BaseDaoImpl<Photo> implements UploadServi
 
     @Override
     public List<Photo> findOwnPhoto(Long id) {
-        return getCurrentSession().createQuery("FROM Photo p WHERE p.id = ?")
+        return getCurrentSession().createQuery("FROM Photo p WHERE p.userId = ?")
                 .setParameter(0, id)
                 .list();
     }
