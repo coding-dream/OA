@@ -3,7 +3,6 @@ package com.wenjun.oa.service;
 import com.wenjun.oa.base.BaseDao;
 import com.wenjun.oa.bean.Department;
 import com.wenjun.oa.bean.LeaveBean;
-import com.wenjun.oa.bean.Message;
 import com.wenjun.oa.bean.User;
 
 import java.util.List;

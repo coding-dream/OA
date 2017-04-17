@@ -1,12 +1,15 @@
 package com.wenjun.oa.action;
 
+import com.google.gson.Gson;
 import com.wenjun.oa.bean.*;
-import com.wenjun.oa.service.*;
-import com.wenjun.oa.service.impl.LeaveApproverServiceImpl;
-import com.wenjun.oa.service.impl.LeaveProgressServiceImpl;
+import com.wenjun.oa.service.LeaveApproverService;
+import com.wenjun.oa.service.MessageService;
+import com.wenjun.oa.service.UserService;
+import com.wenjun.oa.service.WorkflowService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -36,9 +39,6 @@ public class WorkflowAction {
     @Resource
     private LeaveApproverService leaveApproverService;
 
-    @Resource
-    private LeaveProgressService leaveProgressService ;
-    
 
     // ===================================申请人===================================
 
@@ -47,12 +47,12 @@ public class WorkflowAction {
     public String applyTypeListUI(Map map) throws Exception {
 //        轻轻松松走完流程审核
         List<ApplyType> list = new ArrayList<ApplyType>();
-        list.add(new ApplyType("请假", ""));
-        list.add(new ApplyType("加班", ""));
-        list.add(new ApplyType("报销", ""));
-        list.add(new ApplyType("出差", ""));
-        list.add(new ApplyType("外出", ""));
-        list.add(new ApplyType("物品", ""));
+        list.add(new ApplyType("请假", "flow_submitUI.action"));
+        list.add(new ApplyType("加班", "flow_submitUI.action"));
+        list.add(new ApplyType("报销", "flow_submitUI.action"));
+        list.add(new ApplyType("出差", "flow_submitUI.action"));
+        list.add(new ApplyType("外出", "flow_submitUI.action"));
+        list.add(new ApplyType("物品", "flow_submitUI.action"));
 
         map.put("applyTypeList", list);
 
@@ -112,12 +112,23 @@ public class WorkflowAction {
     @RequestMapping("/flow_leaveList.action")
     public String flow_leaveList(HttpSession session,Map map) throws Exception {
         User user = getCurrentUser(session);
-        System.out.println("user" + user);
         List<LeaveBean> list = workflowService.getLeaveListByUser(user.getId());
         map.put("leaveList", list);
 
         return "flow/leaveList";
     }
+
+
+    /** 我的申请Detail处理结果  */
+    @RequestMapping("/flow_leaveDetail.action")
+    public String flow_leaveDetail(Long leaveId,Map map) throws Exception {
+        LeaveBean leaveBean = workflowService.getById(leaveId);
+        List<LeaveApprover> leaveApprovers =  leaveApproverService.getByLeaveId(leaveBean.getId());
+        map.put("leaveApprovers", leaveApprovers);
+        return "flow/leaveDetail";
+    }
+
+
 
     // ===================================审批人===================================
 
@@ -150,16 +161,46 @@ public class WorkflowAction {
 
     /** 审批处理 */
     @RequestMapping("/flow_approve.action")
-    public String approve(Long messageId,LeaveApprover model) throws Exception {
+    public String approve(HttpSession session,Long messageId,LeaveApprover model) throws Exception {
+        User currentUser = getCurrentUser(session);
+
+        // 消息处理
         Message message = messageService.getById(messageId);
         message.setDisable(true);
         messageService.update(message);
 
+        //审批单处理
+        model.setUserId(currentUser.getId());
+        model.setUsername(currentUser.getName());
         model.setCreateTime(new Date());
         leaveApproverService.save(model);
 
-        // 进度条
+        // 请假单处理(处理中 or 同意 or 拒绝 )
+        Long leaveId = model.getLeaveId();
+        LeaveBean leaveBean = workflowService.getById(leaveId);
+        if (model.getStatus() == LeaveApprover.STATUS_REFUSE) {
+            //如果一个审批人拒绝，则直接拒绝申请
+            leaveBean.setResult(LeaveBean.STATUS_REFUSE);
+            workflowService.update(leaveBean);
+        }else{ //如果全部通过，同意申请
+            int sendRequestLength = leaveBean.getApproverid().split(",").length-1; //审批人总数
+            List<LeaveApprover> leaveApprovers =  leaveApproverService.getByLeaveId(leaveBean.getId());//所有审批人员
+            if (leaveApprovers.size() == sendRequestLength) {
+                List<Integer> tempResults = new ArrayList<Integer>();
+                for (LeaveApprover approver : leaveApprovers) {
+                    int status = approver.getStatus();
+                    tempResults.add(status);
+                }
+                if (tempResults.contains(LeaveApprover.STATUS_REFUSE)) {
+                    leaveBean.setResult(LeaveBean.STATUS_REFUSE);
+                    workflowService.update(leaveBean);
+                } else {
+                    leaveBean.setResult(LeaveBean.STATUS_AGREE);
+                    workflowService.update(leaveBean);
+                }
+            }
 
+        }
 
         return "redirect:/flow_myMessageList.action";// // 成功后转到待我审批页面
 

@@ -3,7 +3,6 @@ package com.wenjun.oa.service.impl;
 import com.wenjun.oa.base.BaseDaoImpl;
 import com.wenjun.oa.bean.Department;
 import com.wenjun.oa.bean.LeaveBean;
-import com.wenjun.oa.bean.Message;
 import com.wenjun.oa.bean.User;
 import com.wenjun.oa.service.WorkflowService;
 import org.hibernate.Session;

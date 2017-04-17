@@ -14,7 +14,6 @@
 <body>
 
 
-    <a href="flow_submitUI.action">请假</a>
     <c:forEach var="type" items="${applyTypeList}">
         <a href="${type.url}" >${type.name}</a>
     </c:forEach>

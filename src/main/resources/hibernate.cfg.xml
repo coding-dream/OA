@@ -27,8 +27,6 @@
 	<mapping class="com.wenjun.oa.bean.Message"/>
 	<mapping class="com.wenjun.oa.bean.Notice"/>
 	<mapping class="com.wenjun.oa.bean.Photo"/>
-	<mapping class="com.wenjun.oa.bean.LeaveProgress"/>
-
 
 
 </session-factory>

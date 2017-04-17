@@ -21,6 +21,7 @@
                 <tr>${leave.type}</tr>
                 <tr>${leave.startTime}</tr>
                 <tr>${leave.reason}</tr>
+                <tr>${leave.result}</tr>
             </td>
         </c:forEach>
     </table>

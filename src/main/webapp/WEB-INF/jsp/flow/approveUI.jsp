@@ -28,10 +28,9 @@
 
          <form action="flow_approve.action" method="post">
 
-            <input type="hidden" name="messageId" value="${message.id}"/>修改Message表为disable <br/>
+             <input type="hidden" name="messageId" value="${message.id}"/>修改Message表为disable <br/>
 
              <input type="hidden" name="leaveId" value="${leaveBean.id}"/>请假表ID <br/>
-             <input type="hidden" name="userId" value="${message.userId}"/>审批人ID <br/>
              <input type="radio" name="status" value="1" checked/>同意 <br/>
              <input type="radio" name="status" value="2"/>拒绝<br/>
              <input type="text" name="summary" /><br/>
