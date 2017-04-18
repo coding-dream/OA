@@ -4,8 +4,23 @@
 	<title>TopMenu</title>
 	<%@ include file="/WEB-INF/jsp/common/adminLTE.jspf"%>
 </head>
-
-<body class="hold-transition skin-blue layout-top-nav">
+<!--
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<body class="hold-transition skin-blue-light layout-top-nav">
 
 <header class="main-header">
     <nav class="navbar navbar-static-top">
