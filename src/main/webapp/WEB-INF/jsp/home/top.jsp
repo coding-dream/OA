@@ -42,6 +42,10 @@
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+
+                    <li>
+                        <a href="#" >欢迎你 &nbsp;&nbsp;${user.loginName}</a>
+                    </li>
                     <!-- Messages: style can be found in dropdown.less-->
                     <li class="messages-menu">
                         <!-- Menu toggle button -->

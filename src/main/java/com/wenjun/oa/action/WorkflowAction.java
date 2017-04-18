@@ -147,13 +147,13 @@ public class WorkflowAction {
         Long leaveId = message.getLeaveId();
         LeaveBean leaveBean = workflowService.getById(leaveId);
 
-        Long userId = message.getUserId();
-        User leaveUser = userService.getById(userId);
+        Long userId = leaveBean.getUserId();//请假人
+        User approverUser= userService.getById(userId);
 
 
         map.put("message", message);
         map.put("leaveBean", leaveBean);
-        map.put("leaveUser", leaveUser);
+        map.put("approverUser", approverUser);
         return "flow/approveUI";
     }
 
