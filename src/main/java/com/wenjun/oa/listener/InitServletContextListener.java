@@ -1,6 +1,8 @@
 package com.wenjun.oa.listener;
 
+import com.wenjun.oa.bean.Notice;
 import com.wenjun.oa.bean.Privilege;
+import com.wenjun.oa.service.NoticeService;
 import com.wenjun.oa.service.PrivilegeService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -33,6 +35,7 @@ public class InitServletContextListener implements ServletContextListener {
         List<String> allPrivilegeUrls = privilegeService.getAllPrivilegeUrls();
         application.setAttribute("allPrivilegeUrls", allPrivilegeUrls);
         System.out.println("-- 已准备好所有权限的URL数据 --");
+
 
     }
 

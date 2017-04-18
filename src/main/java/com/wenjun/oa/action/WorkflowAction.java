@@ -122,7 +122,22 @@ public class WorkflowAction {
     public String flow_leaveDetail(Long leaveId,Map map) throws Exception {
         LeaveBean leaveBean = workflowService.getById(leaveId);
         List<LeaveApprover> leaveApprovers =  leaveApproverService.getByLeaveId(leaveBean.getId());
+
+        User leaveUser = userService.getById(leaveBean.getUserId());
+
         map.put("leaveApprovers", leaveApprovers);
+        map.put("leaveBean", leaveBean);
+        map.put("leaveUser", leaveUser);
+
+        List<String> list = new ArrayList<String>();
+        list.add("请假");
+        list.add("加班");
+        list.add("报销");
+        list.add("出差");
+        list.add("外出");
+        list.add("物品");
+        int index = leaveBean.getType();
+        map.put("type", list.get(index));
         return "flow/leaveDetail";
     }
 

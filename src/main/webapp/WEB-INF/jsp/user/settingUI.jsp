@@ -106,7 +106,6 @@
                 <div class="control-group">
                     <div class="controls">
                         <button type="submit" class="btn">保存</button>
-                        <button class="btn">返回</button>
                     </div>
                 </div>
             </form>
