@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,7 +10,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style-responsive.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/table-responsive.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/lightbox/lightbox.min.css">
-
 
 </head>
 <body>
@@ -25,6 +25,12 @@
                 </header>
                 <div class="panel-body">
                     <div id="gallery" class="media-gal">
+                        <c:if test="${fn:length(photoList  ) == 0 }">
+                            <div class="images item" >
+                                <p>暂无相片</p>
+                            </div>
+                        </c:if>
+
                         <c:forEach var="photo" items="${photoList }">
                             <div class="images item" >
                                 <a href="${photo.url}" data-lightbox="example-set" data-title="我想知道相片背后的故事">

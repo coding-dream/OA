@@ -35,7 +35,6 @@ public class NoticeAction {
             map.put("content", notice.getContent());
         }else{
             Notice notice = new Notice();
-            notice.setTitle("公告");
             notice.setContent(content);
             notice.setCreateTime(new Date());
             noticeService.save(notice);

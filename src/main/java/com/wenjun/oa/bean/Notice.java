@@ -18,11 +18,7 @@ public class Notice  { //公告通知表
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
-
     private String content;
-
-    private int status;//状态 (已读/未读)
 
     private Date createTime;
 
@@ -34,13 +30,6 @@ public class Notice  { //公告通知表
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getContent() {
         return content;
@@ -48,14 +37,6 @@ public class Notice  { //公告通知表
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
     public Date getCreateTime() {

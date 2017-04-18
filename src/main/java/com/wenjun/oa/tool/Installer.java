@@ -1,8 +1,7 @@
 
 package com.wenjun.oa.tool;
 
-import com.wenjun.oa.bean.Privilege;
-import com.wenjun.oa.bean.User;
+import com.wenjun.oa.bean.*;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @Component
 public class Installer {
@@ -66,14 +66,6 @@ public class Installer {
 		session.save(new Privilege("初始化密码", "/user_initPassword", menu3));
 
 		// --------------------
-		menu = new Privilege("网上交流", null, null);
-		menu1 = new Privilege("论坛管理", "/forumManage_list", menu);
-		menu2 = new Privilege("论坛", "/forum_list", menu);
-		session.save(menu);
-		session.save(menu1);
-		session.save(menu2);
-
-		// --------------------
 		menu = new Privilege("审批管理", null, null);
 		menu1 = new Privilege("起草申请", "/flow_applyTypeListUI", menu);
 		menu2 = new Privilege("待我审批", "/flow_myMessageList", menu);
@@ -83,6 +75,81 @@ public class Installer {
 		session.save(menu1);
 		session.save(menu2);
 		session.save(menu3);
+
+		// ====================添加测试数据
+		Notice notice = new Notice();
+		notice.setContent("各部门:\n" +
+				"\t依国务院办公厅通知，2017年清明节放假时间为4月2日至4月4日共3天，\n" +
+				"4月1号(星期六)正常上班。\n" +
+				"\t为保障假后工作的正常运行，请各位同事离开工作岗位的同时检查好各项设备的运行情况，并关闭所有的电子设备，包括电脑，\n" +
+				"电视，空调，饮水机等。节假出行注意安全。\n" +
+				"\t特此通知！\n" +
+				"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t文珺信息科技有限公司\n" +
+				"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t2017年5月15日\n" +
+				"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n" +
+				"\t\n" +
+				"\t");
+		notice.setCreateTime(new Date());
+		session.save(notice);
+		// ---------------------
+
+		Department department1 = new Department();
+		department1.setName("市场部");
+		department1.setDescription("前端销售，后端销售，商务组");
+
+		Department department2 = new Department();
+		department2.setName("研发部");
+		department2.setDescription("研发部，GO组，PHP组，UI组");
+
+		Department department3 = new Department();
+		department3.setName("行政部");
+		department3.setDescription("日常后勤，人事");
+
+		Department department4 = new Department();
+		department4.setName("财务部");
+		department4.setDescription("掌管经济大权");
+
+		Department department5 = new Department();
+		department5.setName("运营部");
+		department5.setDescription("微信运营组，PC运营组");
+
+		session.save(department1);
+		session.save(department2);
+		session.save(department3);
+		session.save(department4);
+		session.save(department5);
+
+		// ---------------------
+
+		Role role1 = new Role();
+		role1.setName("总经理");
+		role1.setDescription("管理公司日常事务");
+
+		Role role2 = new Role();
+		role2.setName("部门经理");
+		role2.setDescription("负责部门事务");
+
+		Role role3 = new Role();
+		role3.setName("主管");
+		role3.setDescription("小组主管");
+
+		Role role4 = new Role();
+		role4.setName("组长");
+		role4.setDescription("小组领队");
+
+		Role role5 = new Role();
+		role5.setName("员工");
+		role5.setDescription("公司员工");
+
+		session.save(role1);
+		session.save(role2);
+		session.save(role3);
+		session.save(role4);
+		session.save(role5);
+
+
+
+
 
 	}
 
