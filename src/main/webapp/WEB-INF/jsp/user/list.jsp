@@ -35,7 +35,7 @@
         <tbody id="TableData" class="dataContainer" datakey="userList">
 
         <c:forEach var="user" items="${pageBean.recordList}">
-            <tr class="TableDetail1 template">
+            <tr class="TableDetail1 template" style="text-align: center;">
                 <td>${user.loginName}&nbsp;</td>
                 <td>${user.name}&nbsp;</td>
                 <td>${user.department.name}&nbsp;</td>

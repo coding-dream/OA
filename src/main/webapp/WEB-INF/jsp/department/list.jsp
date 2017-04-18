@@ -41,7 +41,7 @@
                 <td>
                     <!--此处的parentId参数为了删除后能够跳转到当前部门的上级部门列表-->
                     <a href="department_delete.action?id=${department.id}&parentId=${department.parent.id}" onclick="return window.confirm('这将删除所有的下级部门，您确定要删除吗？')">删除</a>
-                    <a href="department_editUI.action?id=${department.id}">修改</a>
+                    <a href="department_editUI.action?departId=${department.id}">修改</a>
                     &nbsp;
                 </td>
             </tr>

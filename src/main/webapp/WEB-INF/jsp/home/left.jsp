@@ -25,7 +25,7 @@
 			<c:if test="${topPri.show}">
 				<li class="level1">
 					<div onClick="menuClick(this);" class="level1Style" style="color: #004A7D">
-						<img src="${pageContext.request.contextPath}/style/images/MenuIcon/${topPri.id}.gif" />
+						<img src="${pageContext.request.contextPath}/style/images/MenuIcon/${topPri.id}.png" />
 							${topPri.name}
 					</div>
 

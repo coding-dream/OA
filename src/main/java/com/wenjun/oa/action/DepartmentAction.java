@@ -80,14 +80,14 @@ public class DepartmentAction {
     }
 
     @RequestMapping("/department_editUI.action")
-    public String editUI(Department model,Map map) throws Exception {
+    public String editUI(Long departId,Map map) throws Exception {
         // 准备数据, departmentList
         List<Department> topList = departmentService.findTopList();
         List<Department> departmentList = DepartmentUtils.getAllDepartments(topList);
         map.put("departmentList", departmentList);
 
         // 准备回显的数据
-        Department department = departmentService.getById(model.getId());
+        Department department = departmentService.getById(departId);
         map.put("department",department);
         if (department.getParent() != null) {
             Long parentId= department.getParent().getId();

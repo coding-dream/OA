@@ -42,4 +42,5 @@ public class DepartmentServiceImpl extends BaseDaoImpl<Department> implements De
                 .list();
     }
 
+
 }

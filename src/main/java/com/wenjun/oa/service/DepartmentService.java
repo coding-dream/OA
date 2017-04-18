@@ -16,4 +16,5 @@ public interface DepartmentService extends BaseDao<Department>{
     List<Department> findTopList();
 
     List<Department> findChildren(Long parentId);
+
 }

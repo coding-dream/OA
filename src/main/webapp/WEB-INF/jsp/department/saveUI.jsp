@@ -37,8 +37,14 @@
                             <select name="parentId" class="SelectStyle">
                                 <option value="">请选择上级部门</option>
                                 <c:forEach var="depart" items="${departmentList}">
-                                    <option value="${depart.id}">${depart.name}</option>
+                                    <c:if test="${parentId == depart.id}">
+                                        <option value="${depart.id}" selected>${depart.name}</option>
+                                    </c:if>
+                                    <c:if test="${parentId != depart.id}">
+                                        <option value="${depart.id}">${depart.name}</option>
+                                    </c:if>
                                 </c:forEach>
+
                             </select>
                         </td>
                     </tr>
@@ -63,9 +69,6 @@
 </div>
 
 <div class="Description">
-	说明：<br />
-	1，上级部门的列表是有层次结构的（树形）。<br/>
-	2，如果是修改：上级部门列表中不能显示当前修改的部门及其子孙部门。因为不能选择自已或自已的子部门作为上级部门。<br />
 </div>
 
 </body>
