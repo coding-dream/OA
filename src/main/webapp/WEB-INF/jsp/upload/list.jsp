@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/table-responsive.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/lightbox/lightbox.min.css">
 
-    <script src="${pageContext.request.contextPath}/static/lightbox/lightbox.min.js"></script>
+
 </head>
 <body>
 
@@ -26,7 +26,7 @@
                 <div class="panel-body">
                     <div id="gallery" class="media-gal">
                         <c:forEach var="photo" items="${photoList }">
-                            <div class="images item " >
+                            <div class="images item" >
                                 <a href="${photo.url}" data-lightbox="example-set" data-title="我想知道相片背后的故事">
                                     <img src="${photo.url }" alt="ic_action_share" />
                                 </a>
@@ -53,6 +53,6 @@
 </div>
 
 
-
+<script src="${pageContext.request.contextPath}/static/lightbox/lightbox.min.js"></script>
 </body>
 </html>

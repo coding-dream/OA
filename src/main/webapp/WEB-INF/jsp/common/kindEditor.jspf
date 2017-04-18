@@ -1,4 +1,3 @@
-
 <%
     request.setCharacterEncoding("UTF-8");
     String htmlData = request.getParameter("content") != null ? request.getParameter("content") : "";
@@ -9,6 +8,8 @@
 <script charset="utf-8" src="${pageContext.request.contextPath}/static/KindEditor/kindeditor-min.js"></script>
 <script charset="utf-8" src="${pageContext.request.contextPath}/static/KindEditor/lang/zh_CN.js"></script>
 <script charset="utf-8" src="${pageContext.request.contextPath}/static/KindEditor/plugins/code/prettify.js"></script>
+
+
 
 <script>
     KindEditor.ready(function(K) {
@@ -33,7 +34,6 @@
     });
 </script>
 
-<%=htmlData%>
 <%!
     private String htmlspecialchars(String str) {
         str = str.replaceAll("&", "&amp;");

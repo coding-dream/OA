@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +35,11 @@ public class HomeAction  {
         return "home/bottom";
     }
     @RequestMapping("/home_left.action")
-    public String left(Map map) throws Exception {
+    public String left() throws Exception {
+        return "home/left";
+    }
+    @RequestMapping("/home_right.action")
+    public String right(Map map) throws Exception {
         //准备公告信息
         List<Notice> noticeList = noticeService.findAll();
         if (noticeList.size() > 0) {
@@ -45,10 +47,6 @@ public class HomeAction  {
             map.put("content", notice.getContent());
         }
 
-        return "home/left";
-    }
-    @RequestMapping("/home_right.action")
-    public String right() throws Exception {
         return "home/right";
     }
 

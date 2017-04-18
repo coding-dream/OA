@@ -5,7 +5,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>文珺OA系统</title>
     <%@ include file="/WEB-INF/jsp/common/adminLTE.jspf" %>
-    <%@ include file="/WEB-INF/jsp/common/kindEditor.jspf" %>
 
 </head>
 <body>
@@ -32,6 +31,8 @@
     <div class="box-body">
 
         <c:if test="${user.loginName == 'admin'}">
+            <%@ include file="/WEB-INF/jsp/common/kindEditor.jspf" %>
+
             <%--显示 编辑页面 --%>
             <form name = "ck_form" action="notice_update.action" enctype="multipart/form-data" method="post">
                 <textarea name="content" cols="100" rows="8" style="width:700px;height:200px;"><%=htmlspecialchars(htmlData)%></textarea>
@@ -40,7 +41,7 @@
         </c:if>
 
         <c:if test="${user.loginName !='admin'}">
-            ${content}
+            ${content }
         </c:if>
 
     </div>
