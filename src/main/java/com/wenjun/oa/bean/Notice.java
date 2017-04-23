@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "wenjun_notice")
 public class Notice  { //公告通知表
 
     @Id
@@ -18,6 +19,7 @@ public class Notice  { //公告通知表
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Lob
     private String content;
 
     private Date createTime;

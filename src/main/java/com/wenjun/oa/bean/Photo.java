@@ -9,6 +9,7 @@ import javax.persistence.*;
  * website: http://need88.com
  */
 @Entity
+@Table(name = "wenjun_photo")
 public class Photo {
     @Id
     @Column(name = "photo_id")

@@ -11,6 +11,7 @@ import java.util.Set;
  * website: http://need88.com
  */
 @Entity
+@Table(name = "wenjun_privilege")
 public class Privilege  {
     @Id
     @Column(name = "zj_privilege_id")

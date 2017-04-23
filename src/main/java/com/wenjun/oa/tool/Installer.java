@@ -24,8 +24,8 @@ public class Installer {
 	 */
 	@Transactional
 	public void install() {
-		Session session = sessionFactory.getCurrentSession();
 
+		Session session = sessionFactory.getCurrentSession();
 		// ==============================================================
 		// 保存超级管理员用户
 		User user = new User();
@@ -79,16 +79,12 @@ public class Installer {
 		// ====================添加测试数据
 		Notice notice = new Notice();
 		notice.setContent("各部门:\n" +
-				"\t依国务院办公厅通知，2017年清明节放假时间为4月2日至4月4日共3天，\n" +
+				"        依国务院办公厅通知，2017年清明节放假时间为4月2日至4月4日共3天，\n" +
 				"4月1号(星期六)正常上班。\n" +
-				"\t为保障假后工作的正常运行，请各位同事离开工作岗位的同时检查好各项设备的运行情况，并关闭所有的电子设备，包括电脑，\n" +
-				"电视，空调，饮水机等。节假出行注意安全。\n" +
-				"\t特此通知！\n" +
-				"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t文珺信息科技有限公司\n" +
-				"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t2017年5月15日\n" +
-				"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n" +
-				"\t\n" +
-				"\t");
+				"        为保障假后工作的正常运行，请各位同事离开工作岗位的同时检查好各项设备的运行情况，并关闭所有的电子设备，包括电脑，电视，空调，饮水机等。节假出行注意安全。\n" +
+				"           特此通知！\u200B\n" +
+				"                                                                                                                                文珺信息科技有限公司\n" +
+				"                                                                                                                                2017年5月15日");
 		notice.setCreateTime(new Date());
 		session.save(notice);
 		// ---------------------

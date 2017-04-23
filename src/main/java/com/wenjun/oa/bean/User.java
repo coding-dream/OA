@@ -12,7 +12,7 @@ import java.util.Set;
  * website: http://need88.com
  */
 @Entity
-@Table(name = "user")
+@Table(name = "wenjun_user")
 public class User {
 
     @Id @Column(name = "zj_user_id")

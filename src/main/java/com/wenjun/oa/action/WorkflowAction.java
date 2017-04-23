@@ -212,16 +212,12 @@ public class WorkflowAction {
                     workflowService.update(leaveBean);
                     // 审批人都同意了，发送邮件或短信，可以走人了
                     // MainManager.sendTo(User);
-
                 }
             }
 
         }
-
         return "redirect:/flow_myMessageList.action";// // 成功后转到待我审批页面
-
     }
-
 
     private User getCurrentUser(HttpSession session){
         User user = (User) session.getAttribute("user");

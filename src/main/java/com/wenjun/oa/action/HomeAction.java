@@ -46,7 +46,6 @@ public class HomeAction  {
             Notice notice = noticeList.get(0);
             map.put("content", notice.getContent());
         }
-
         return "home/right";
     }
 

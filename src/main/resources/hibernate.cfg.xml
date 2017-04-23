@@ -2,11 +2,9 @@
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
-
 <hibernate-configuration>
 
 <session-factory>
-
 	<!-- 1，数据库连接信息 -->
 	<property name="dialect">
 		org.hibernate.dialect.MySQL5InnoDBDialect
@@ -27,7 +25,6 @@
 	<mapping class="com.wenjun.oa.bean.Message"/>
 	<mapping class="com.wenjun.oa.bean.Notice"/>
 	<mapping class="com.wenjun.oa.bean.Photo"/>
-
 
 </session-factory>
 

@@ -13,6 +13,7 @@ import java.util.Date;
  */
 
 @Entity
+@Table(name = "wenjun_leave")
 public class LeaveBean { //请假表
     public static final int STATUS_DRAFT = 0;//草稿
     public static final int STATUS_NOMAL = 1; //正常发布

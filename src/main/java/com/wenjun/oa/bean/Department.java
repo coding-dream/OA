@@ -12,6 +12,7 @@ import java.util.Set;
  */
 
 @Entity
+@Table(name = "wenjun_department")
 public class Department {
 
     @Id @Column(name = "zj_depart_id")

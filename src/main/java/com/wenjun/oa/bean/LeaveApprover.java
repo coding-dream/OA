@@ -10,6 +10,7 @@ import java.util.Date;
  * website: http://need88.com
  */
 @Entity
+@Table(name = "wenjun_leaveApprover")
 public class LeaveApprover { //审批表
 
     public static final int STATUS_PROCESS = 0; //处理中

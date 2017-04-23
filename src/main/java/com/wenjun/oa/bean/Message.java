@@ -10,6 +10,7 @@ import java.util.Date;
  * website: http://need88.com
  */
 @Entity
+@Table(name = "wenjun_message")
 public class Message  { // 通知消息表
     public static final int MESSAGE_NO_WATCHED = 1;
     public static final int MESSAGE_WATCHED = 2;

@@ -12,7 +12,8 @@ import java.util.Set;
  */
 
 @Entity
-public class Role {
+@Table(name = "wenjun_role")
+public class Role  {
     @Id
     @Column(name = "zj_role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
