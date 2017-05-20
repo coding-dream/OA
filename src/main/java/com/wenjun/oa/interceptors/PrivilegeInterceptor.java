@@ -50,6 +50,7 @@ public class PrivilegeInterceptor implements HandlerInterceptor{
 	 * 调用目标方法之后, 但渲染视图之前.
 	 * 可以对请求域中的属性或视图做出修改.
 	 */
+
 	@Override
 	public void postHandle(HttpServletRequest request,
 						   HttpServletResponse response, Object handler,

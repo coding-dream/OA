@@ -17,10 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by wangli0 on 2017/4/8.
@@ -58,8 +55,6 @@ public class UserMgAction {
         User user = (User) session.getAttribute("user");
         List<Object> parameters = new ArrayList();
         parameters.add(user);
-
-
         //ASC DESC
         String sql = "FROM User u WHERE u <> ? ORDER BY u.createTime DESC";
         PageBean pageBean = userMgService.getPageBean(currentPage, Constants.PAGE_SIZE, sql, parameters);
@@ -98,6 +93,7 @@ public class UserMgAction {
         // >> 设置默认密码为1234（要使用MD5摘要）
         String md5Digest = DigestUtils.md5Hex("1234");
         model.setPassword(md5Digest);
+        model.setCreateTime(new Date());
 
         // 保存到数据库
         userMgService.save(model);

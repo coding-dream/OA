@@ -107,6 +107,9 @@
                     <div class="controls">
                         <button type="submit" class="btn">保存</button>
                     </div>
+                    <div class="controls">
+                        <button type="submit" class="btn">修改密码</button>
+                    </div>
                 </div>
             </form>
         </div>

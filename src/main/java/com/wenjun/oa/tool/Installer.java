@@ -11,7 +11,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 
 @Component
 public class Installer {
@@ -118,32 +121,30 @@ public class Installer {
 		// ---------------------
 
 		Role role1 = new Role();
-		role1.setName("总经理");
+		role1.setName("经理");
 		role1.setDescription("管理公司日常事务");
 
 		Role role2 = new Role();
-		role2.setName("部门经理");
-		role2.setDescription("负责部门事务");
-
-		Role role3 = new Role();
-		role3.setName("主管");
-		role3.setDescription("小组主管");
-
-		Role role4 = new Role();
-		role4.setName("组长");
-		role4.setDescription("小组领队");
-
-		Role role5 = new Role();
-		role5.setName("员工");
-		role5.setDescription("公司员工");
+		role2.setName("员工");
+		role2.setDescription("公司员工");
 
 		session.save(role1);
 		session.save(role2);
-		session.save(role3);
-		session.save(role4);
-		session.save(role5);
 
+		List<Role> roleList = new ArrayList<Role>();
+		roleList.add(role2);
 
+		//测试用户
+		for(int i=0;i<100;i++){
+			User u = new User();
+			u.setLoginName("wangli"+i);
+			u.setName("王立"+i);
+			u.setPassword(DigestUtils.md5Hex("1234"));
+			u.setCreateTime(new Date());
+			u.setRoles(new HashSet<Role>(roleList));
+
+			session.save(u); // 保存
+		}
 
 
 
