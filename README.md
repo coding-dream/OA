@@ -1,2 +1,2 @@
-# OA系统
-采用Gradle构建JavaEE, 开发工具 Intellij IDEA,框架 Spring,SpringMVC,Hibernate
+# 系统未完成
+系统未完成！！！仅仅Demo，bug未修复！为毕设项目，如有发现，请勿使用以免发生重复！
